@@ -15,26 +15,32 @@ struct MainScreen: View {
     var week: Week
     var itemColumns: [GridItem] = Array(repeating: .init(.adaptive(minimum: 100)), count: 2)
     var body: some View {
-        ZStack {
-            Color.darkBackground.ignoresSafeArea()
-            ScrollView {
-                VStack (alignment: .leading){
-                    Text("다음 알람")
-                        .responsiveTextify(fontSize: 14, fontWeight: .regular)
-                        .foregroundColor(Color.lightGrey)
-                    Text("\(String(tempHour))시간 \(String(tempMinuite))분 남음")
-                        .responsiveTextify(fontSize: 26, fontWeight: .medium)
-                    
-                    LazyVGrid (columns: itemColumns, spacing: 20 ) {
-                        ForEach(tempArray, id: \.self) { item in
-                            AlarmItemView(week: Week())
+        NavigationView {
+            GeometryReader { g in
+                ZStack (alignment:.bottomTrailing) {
+                    Color.darkBackground.ignoresSafeArea()
+                    ScrollView {
+                        VStack (alignment: .leading) {
+                            Text("다음 알람")
+                                .responsiveTextify(fontSize: 14, fontWeight: .regular)
+                                .foregroundColor(Color.lightGrey)
+                            Text("\(String(tempHour))시간 \(String(tempMinuite))분 남음")
+                                .responsiveTextify(fontSize: 26, fontWeight: .medium)
+                            LazyVGrid (columns: itemColumns, spacing: 20 ) {
+                                ForEach(tempArray, id: \.self) { item in
+                                    AlarmItemView(week: Week())
+                                }
+                                .aspectRatio(154/162, contentMode: .fit)
+                            }
+                            Spacer()
                         }
-                        .aspectRatio(154/162, contentMode: .fit)
+                        .padding(.horizontal, 20)
                     }
-                    Spacer()
+                        FloatingActionButton()
+                            .position(x: g.size.width - 52, y: g.size.height - 60)
                 }
-                .padding(.horizontal, 20)
             }
+            .hiddenNavBarStyle()
         }
     }
 }
@@ -50,7 +56,7 @@ struct AlarmItemView: View {
         let shape = RoundedRectangle(cornerRadius: 20).foregroundColor(Color.lightDark)
         ZStack {
             shape
-            VStack (alignment: .leading){
+            VStack (alignment: .leading) {
                 Text("Work")
                     .responsiveTextify(fontSize: 14, fontWeight: .regular)
                 HStack (alignment: .firstTextBaseline){
@@ -62,7 +68,9 @@ struct AlarmItemView: View {
                 Spacer()
                 HStack {
                     ForEach (week.weekList) {item in
-                        Text(item.content).weekItemModifier(isSelected: item.isSelected)
+                        Text(item.content)
+                            .responsiveTextify(fontSize: 12, fontWeight: .bold)
+                            .weekItemModifier(isSelected: item.isSelected)
                     }
                     
                 }

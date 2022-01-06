@@ -7,7 +7,7 @@ import Foundation
 
 class Week {
     typealias Week = WeekModel.Week
-    static let tempWeekList: [String] = ["S", "M", "T", "W", "T", "F", "S"]
+    static let tempWeekList: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     
     private(set) var model: WeekModel = WeekModel { index in
         tempWeekList[index]
