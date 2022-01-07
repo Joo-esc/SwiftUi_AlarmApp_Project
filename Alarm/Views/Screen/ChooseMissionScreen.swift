@@ -8,34 +8,49 @@
 import SwiftUI
 
 struct ChooseMissionScreen: View {
+    private(set) var mission: Mission
     var itemColumns: [GridItem] = Array(repeating: .init(.adaptive(minimum: 100)), count: 2)
     var body: some View {
-        ZStack (alignment: .leading) {
-            Color.darkBackground.ignoresSafeArea()
-            VStack {
-                Text("미션을 선택해주세요").responsiveTextify(fontSize: 24, fontWeight: .medium)
-                LazyVGrid (columns: itemColumns, spacing: 20 ) {
-                    ForEach(tempArray, id: \.self) { item in
-                        MissionItemView()
+        NavigationView {
+            ZStack {
+                Color.darkBackground.ignoresSafeArea()
+                Text("AIM").foregroundColor(.white)
+                    .onTapGesture {
+
                     }
-                    .aspectRatio(158/113, contentMode: .fit)
+                VStack(alignment: .leading) {
+                    Text("미션을 선택해주세요").responsiveTextify(fontSize: ScreenStyle.titleFontSize, fontWeight: .medium)
+                    LazyVGrid (columns: itemColumns, spacing: ScreenStyle.gridSpacing ) {
+                        ForEach(mission.missions, id:\.self) { item in
+                            NavigationLink (destination: MemorizeGameScreen(id: item.id)){
+                                MissionItemView(mission: item)
+                            }
+                        }
+                        .aspectRatio(ScreenStyle.itemGridRation, contentMode: .fit)
+                    }
+                    Spacer()
                 }
-                Spacer()
-            }
-            .padding(.horizontal, 20)
+                .padding(.horizontal, 20)
+            }.hiddenNavBarStyle()
         }
+    }
+    private struct ScreenStyle {
+        static let titleFontSize: CGFloat = 24
+        static let gridSpacing: CGFloat = 20
+        static let itemGridRation: CGFloat = 158/113
     }
 }
 
 struct MissionItemView: View {
+    var mission: Mission.Mission
     var body: some View {
         GeometryReader { g in
             ZStack {
                 VStack (alignment: .leading) {
-                    Image(systemName: "square.grid.3x3.topleft.filled")
+                    Image(systemName: mission.iconImg)
                         .foregroundColor(.brandColor)
                         .font(.system(size: g.size.width * ItemStyle.iconScale))
-                    Text("기억력 게임")
+                    Text(mission.title)
                         .responsiveTextify(fontSize: ItemStyle.titleFontSize, fontWeight: .medium)
                         .padding(.top, g.size.height * ItemStyle.paddingScale)
                     Spacer()
@@ -57,8 +72,4 @@ struct MissionItemView: View {
     }
 }
 
-struct ChooseMissionScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ChooseMissionScreen()
-    }
-}
+

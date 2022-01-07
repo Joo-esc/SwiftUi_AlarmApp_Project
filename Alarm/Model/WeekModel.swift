@@ -3,7 +3,7 @@
 // 요일과 선택된 유무 값을 store함
 
 
-import SwiftUI
+import Foundation
 
 struct WeekModel {
     private(set) var weekItem: [Week]

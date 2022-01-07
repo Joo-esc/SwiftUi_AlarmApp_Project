@@ -41,7 +41,7 @@ struct MissionSelectView : View {
                 HStack {
                     Text("미션").responsiveTextify(fontSize: 12, fontWeight: .bold)
                     Spacer()
-                    NavigationLink(destination: ChooseMissionScreen()) {
+                    NavigationLink(destination: ChooseMissionScreen(mission: Mission())) {
                         Text("선택안함")
                         .foregroundColor(selectedOption != nil ? .brandColor : .lightGrey)}
                         .responsiveTextify(fontSize: 12, fontWeight: .regular)
