@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F5240B427886EA4001C76D5 /* RemainTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240B327886EA4001C76D5 /* RemainTime.swift */; };
+		6F5240B827888FBE001C76D5 /* RoundRectify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240B727888FBE001C76D5 /* RoundRectify.swift */; };
+		6F5240BA2788980F001C76D5 /* ChooseMissionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240B92788980F001C76D5 /* ChooseMissionScreen.swift */; };
+		6F5240BC2788B71B001C76D5 /* MissionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240BB2788B71B001C76D5 /* MissionModel.swift */; };
 		6F69129D2787584900314809 /* HiddenNavBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F69129C2787584900314809 /* HiddenNavBarStyle.swift */; };
 		6F735C2B27860CF200846817 /* AlarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F735C2A27860CF200846817 /* AlarmApp.swift */; };
 		6F735C2F27860CF200846817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F735C2E27860CF200846817 /* Assets.xcassets */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F5240B327886EA4001C76D5 /* RemainTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemainTime.swift; sourceTree = "<group>"; };
+		6F5240B727888FBE001C76D5 /* RoundRectify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectify.swift; sourceTree = "<group>"; };
+		6F5240B92788980F001C76D5 /* ChooseMissionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMissionScreen.swift; sourceTree = "<group>"; };
+		6F5240BB2788B71B001C76D5 /* MissionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionModel.swift; sourceTree = "<group>"; };
 		6F69129C2787584900314809 /* HiddenNavBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenNavBarStyle.swift; sourceTree = "<group>"; };
 		6F735C2727860CF200846817 /* Alarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F735C2A27860CF200846817 /* AlarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmApp.swift; sourceTree = "<group>"; };
@@ -100,6 +108,7 @@
 			children = (
 				6F735C3A2786115E00846817 /* MainScreen.swift */,
 				6FC8DE8727874038002344E4 /* AddEditAlarmScreen.swift */,
+				6F5240B92788980F001C76D5 /* ChooseMissionScreen.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -119,6 +128,8 @@
 				6FA382752786ECBF00F1948B /* WeekItemModifier.swift */,
 				6FA3827E278705ED00F1948B /* FloatingActionButton.swift */,
 				6F69129C2787584900314809 /* HiddenNavBarStyle.swift */,
+				6F5240B327886EA4001C76D5 /* RemainTime.swift */,
+				6F5240B727888FBE001C76D5 /* RoundRectify.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -127,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				6FA382792786EE0500F1948B /* WeekModel.swift */,
+				6F5240BB2788B71B001C76D5 /* MissionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,8 +225,12 @@
 				6F735C3F2786144E00846817 /* ColorExtension.swift in Sources */,
 				6FA3827A2786EE0500F1948B /* WeekModel.swift in Sources */,
 				6FA3827D2786EE1A00F1948B /* Week.swift in Sources */,
+				6F5240BC2788B71B001C76D5 /* MissionModel.swift in Sources */,
+				6F5240B427886EA4001C76D5 /* RemainTime.swift in Sources */,
 				6FA3827F278705ED00F1948B /* FloatingActionButton.swift in Sources */,
+				6F5240BA2788980F001C76D5 /* ChooseMissionScreen.swift in Sources */,
 				6F735C3B2786115E00846817 /* MainScreen.swift in Sources */,
+				6F5240B827888FBE001C76D5 /* RoundRectify.swift in Sources */,
 				6F735C4227862B7100846817 /* ResponsiveTextify.swift in Sources */,
 				6FA382762786ECBF00F1948B /* WeekItemModifier.swift in Sources */,
 				6FC8DE8827874038002344E4 /* AddEditAlarmScreen.swift in Sources */,
