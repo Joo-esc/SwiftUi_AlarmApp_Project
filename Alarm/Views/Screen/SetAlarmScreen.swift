@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddEditAlarmScreen: View {
+struct SetAlarmScreen: View {
     var body: some View {
         NavigationView {
             ZStack {
@@ -39,17 +39,17 @@ struct MissionSelectView : View {
     var body: some View {
             ZStack {
                 HStack {
-                    Text("미션").responsiveTextify(fontSize: 12, fontWeight: .bold)
+                    Text("미션").responsiveTextify(12, .bold)
                     Spacer()
                     NavigationLink(destination: ChooseMissionScreen(mission: Mission())) {
                         Text("선택안함")
                         .foregroundColor(selectedOption != nil ? .brandColor : .lightGrey)}
-                        .responsiveTextify(fontSize: 12, fontWeight: .regular)
+                        .responsiveTextify(12, .regular)
                 }
             }
         
         .padding(.horizontal, 18)
-        .roundRectify(conrerRadius: 8)
+        .roundRectify(8, .leading)
     }
 }
 
@@ -81,7 +81,7 @@ struct TimeSelectView: View {
                 .colorInvert().colorMultiply(.white)
             
             Spacer()
-        }.roundRectify(conrerRadius: 8)
+        }.roundRectify(8, .leading)
     }
     
 }
@@ -89,6 +89,6 @@ struct TimeSelectView: View {
 
 struct AddEditAlarmScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AddEditAlarmScreen()
+        SetAlarmScreen()
     }
 }

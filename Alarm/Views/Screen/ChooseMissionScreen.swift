@@ -19,10 +19,10 @@ struct ChooseMissionScreen: View {
 
                     }
                 VStack(alignment: .leading) {
-                    Text("미션을 선택해주세요").responsiveTextify(fontSize: ScreenStyle.titleFontSize, fontWeight: .medium)
+                    Text("미션을 선택해주세요").responsiveTextify(ScreenStyle.titleFontSize, .medium)
                     LazyVGrid (columns: itemColumns, spacing: ScreenStyle.gridSpacing ) {
                         ForEach(mission.missions, id:\.self) { item in
-                            NavigationLink (destination: MemorizeGameScreen(id: item.id)){
+                            NavigationLink (destination: SetMissionDetailScreen(id: item.id)){
                                 MissionItemView(mission: item)
                             }
                         }
@@ -51,7 +51,7 @@ struct MissionItemView: View {
                         .foregroundColor(.brandColor)
                         .font(.system(size: g.size.width * ItemStyle.iconScale))
                     Text(mission.title)
-                        .responsiveTextify(fontSize: ItemStyle.titleFontSize, fontWeight: .medium)
+                        .responsiveTextify(ItemStyle.titleFontSize, .medium)
                         .padding(.top, g.size.height * ItemStyle.paddingScale)
                     Spacer()
                 }
@@ -59,7 +59,7 @@ struct MissionItemView: View {
                 .padding(.horizontal, ItemStyle.horizontalPadding)
             }
         }
-        .roundRectify(conrerRadius: ItemStyle.containerRadius)
+        .roundRectify(ItemStyle.containerRadius, .leading)
     }
     
     private struct ItemStyle {

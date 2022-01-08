@@ -6,6 +6,11 @@ struct ResponsiveTextify: ViewModifier {
     let fontSize: CGFloat
     let fontWeight: Font.Weight
     
+    init(_ fontSize: CGFloat, _ fontWeight: Font.Weight) {
+        self.fontSize = fontSize
+        self.fontWeight = fontWeight
+    }
+    
     func body(content: Content) -> some View {
             content
             .font(.system(size: fontSize, weight: fontWeight, design: .default))
@@ -16,8 +21,8 @@ struct ResponsiveTextify: ViewModifier {
 }
 
 extension View {
-    func responsiveTextify(fontSize: CGFloat, fontWeight: Font.Weight) -> some View {
-        modifier(ResponsiveTextify(fontSize: fontSize, fontWeight: fontWeight))
+    func responsiveTextify(_ fontSize: CGFloat, _ fontWeight: Font.Weight) -> some View {
+        modifier(ResponsiveTextify(fontSize, fontWeight))
     }
 }
 

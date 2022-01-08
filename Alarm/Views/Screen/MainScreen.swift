@@ -22,10 +22,10 @@ struct MainScreen: View {
                     ScrollView {
                         VStack (alignment: .leading) {
                             Text("다음 알람")
-                                .responsiveTextify(fontSize: 14, fontWeight: .regular)
+                                .responsiveTextify(14, .regular)
                                 .foregroundColor(Color.lightGrey)
                             Text("\(String(tempHour))시간 \(String(tempMinuite))분 남음")
-                                .responsiveTextify(fontSize: 26, fontWeight: .medium)
+                                .responsiveTextify(26, .medium)
                             LazyVGrid (columns: itemColumns, spacing: 20 ) {
                                 ForEach(tempArray, id: \.self) { item in
                                     AlarmItemView(week: Week())
@@ -58,18 +58,18 @@ struct AlarmItemView: View {
             shape
             VStack (alignment: .leading) {
                 Text("Work")
-                    .responsiveTextify(fontSize: 14, fontWeight: .regular)
+                    .responsiveTextify(14, .regular)
                 HStack (alignment: .firstTextBaseline){
                     Text("8:30")
-                        .responsiveTextify(fontSize: 36, fontWeight: .medium)
+                        .responsiveTextify(36, .medium)
                     Text("AM")
-                        .responsiveTextify(fontSize: 18, fontWeight: .bold)
+                        .responsiveTextify(18, .bold)
                 }
                 Spacer()
                 HStack {
                     ForEach (week.weekList) {item in
                         Text(item.content)
-                            .responsiveTextify(fontSize: 12, fontWeight: .bold)
+                            .responsiveTextify(12, .bold)
                             .weekItemModifier(isSelected: item.isSelected)
                     }
                     

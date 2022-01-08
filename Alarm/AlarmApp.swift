@@ -11,7 +11,8 @@ import SwiftUI
 struct AlarmApp: App {
     var body: some Scene {
         WindowGroup {
-            ChooseMissionScreen(mission: Mission())
+            SetMissionDetailScreen(id: 1)
+//            ChooseMissionScreen(mission: Mission())
 //            AddEditAlarmScreen()
 //               MainScreen(week: Week())
         }

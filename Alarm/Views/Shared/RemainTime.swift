@@ -30,7 +30,7 @@ struct RemainTime : View {
     
     var body: some View {
         Text("지금으로부터 \(computeTime(startDate:startDate).hour!)시간 \(computeTime(startDate:startDate).minute!)분 후에 울림")
-            .responsiveTextify(fontSize: 14, fontWeight: .regular)
+            .responsiveTextify(14, .regular)
     }
 }
 
