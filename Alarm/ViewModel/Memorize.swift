@@ -15,9 +15,11 @@ class Memorize: ObservableObject {
         model.cards
     }
     
-    //MARK: Intent
+    //MARK: - Intent
     func chooseCard(_ card: Card) {
         model.chooseCard(card)
     }
+    
+   
 }
 

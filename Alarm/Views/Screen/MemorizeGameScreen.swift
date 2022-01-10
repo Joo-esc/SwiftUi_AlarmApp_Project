@@ -23,7 +23,7 @@ struct MemorizeGameScreen: View {
                                     .onTapGesture {
                                         game.chooseCard(item)
                                     }
-                            }
+                              }
                         }
                         Spacer()
                     }
