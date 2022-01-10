@@ -1,7 +1,5 @@
 //
-//  MemorizeGameScreen.swift
-//  Alarm
-//
+//  기억력 게임 스크린[기상 시면]
 //  Created by 이해주 on 2022/01/09.
 //
 
@@ -14,57 +12,62 @@ struct MemorizeGameScreen: View {
             ZStack {
                 Color.darkBackground.ignoresSafeArea()
                 VStack() {
-                    RoundIndicator()
+                    GameNumIndicator()
                     GeometryReader { g in
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: g.size.width * 0.3, maximum: g.size.width * 0.6))]) {
-                            ForEach(game.cards) { item in
-                                CardView(card: item)
-                                    .aspectRatio(98/127, contentMode: .fit)
+                        AspectVGrid(ScreenStyle.aspectRatio, ScreenStyle.cardSize, game.cards) { item in
+                            if item.isMatched {
+                                Rectangle().opacity(0.0)
+                            } else {
+                                CardView(card:item)
                                     .onTapGesture {
                                         game.chooseCard(item)
                                     }
-                              }
+                            }
                         }
                         Spacer()
                     }
-                    .padding(.horizontal, 20)
-                }
+                }.padding(.horizontal, ScreenStyle.horizonPad)
             } .hiddenNavBarStyle()
         }
     }
+    
+    private struct ScreenStyle {
+        static let aspectRatio: CGFloat = 98/127
+        static let cardSize: CGFloat = 100
+        static let horizonPad: CGFloat = 20
+    }
 }
 
+// 기억력 카드 게임에서 사용되는 카드 뷰
 struct CardView: View {
     var card: Memorize.Card
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: 12)
         ZStack {
-            if card.isSelected {
-                EmptyView().foregroundColor(.red).roundRectify(12, .center, .lightPurple)
-                shape.strokeBorder(lineWidth: 3).foregroundColor(.white)
-                Text(card.content)
-            }
-            else if card.isMatched {
-                shape.opacity(0.0)
-            }
-            else {
-                EmptyView()
-                    .roundRectify(12, .center)
-            }
+            Text(card.content).cardify(isSelected: card.isSelected)
         }
     }
 }
 
-struct RoundIndicator: View {
+
+// 게임 횟수를 보여주는 인디케이터
+struct GameNumIndicator: View {
     var body: some View {
         HStack {
             Spacer()
             ZStack {
-                Text("1/3").responsiveTextify(24, .medium)
+                Text("1/3").responsiveTextify(IndicatorStyle.textScale, .medium)
             }
-            .roundRectify(12, .center)
-            .frame(width: 90, height: 47)
+            .roundRectify(IndicatorStyle.radius, .center)
+            .frame(width: IndicatorStyle.width, height: IndicatorStyle.height)
         }
+    }
+    
+     private struct IndicatorStyle {
+        static let textScale: CGFloat = 24
+        static let radius: CGFloat = 12
+        static let width: CGFloat = 90
+        static let height: CGFloat = 47
+        
     }
 }
 

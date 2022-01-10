@@ -4,6 +4,8 @@
 //
 // Created by 이해주 on 2022/01/09.
 
+
+
 import Foundation
 
 struct MemorizeModel<CardContent> where CardContent: Equatable{
@@ -17,12 +19,10 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
     
     // 카드 컨텐츠 내용 확인, 동일 카드 선택 여부 판단
     mutating func chooseCard(_ card: Card) {
-
-        let selectedIndex = card.id
-        print("1. selectedIndex = \(selectedIndex)")
         // 조건  : 카드가 이전에 선택되거나 매칭되지 않았을 경우
-        if let chosenIndex = cards.firstIndex(where: {$0.id == card.id }) {
-            print("2. chosenIndex = \(chosenIndex)")
+        if let chosenIndex = cards.firstIndex(where: {$0.id == card.id }),
+           !cards[chosenIndex].isSelected,
+           !cards[chosenIndex].isMatched {
             if let willMatchIndex = prevIndex {
                 // 조건 : 선택된 두 카드의 컨텐츠가 동일한다면
                 if (cards[willMatchIndex].content == cards[chosenIndex].content) {
@@ -45,6 +45,7 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
             cards.append(Card(content: content, id: index * 2))
             cards.append(Card(content: content, id: index * 2 + 1))
         }
+        // 카드 순서를 무작위로 섞음.
         cards = cards.shuffled()
     }
     
