@@ -10,7 +10,8 @@ import SwiftUI
 struct MemorizeRangeIndicator: View {
     var selectedLevel: Double
     var body: some View {
-        Text("\(String(Int(selectedLevel + 3)))X\(String(Int(selectedLevel + 3)))")
+        //  0 1 2 3 4
+        Text("\(String(Int((selectedLevel * 2) + 4)))개의 카드")
             .foregroundColor(.darkGrey)
             .responsiveTextify(12, .medium)
     }

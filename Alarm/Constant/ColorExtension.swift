@@ -9,9 +9,10 @@ extension Color {
     static let brandColor = Color(hex: "F0F757")
     static let lightGrey = Color(hex: "9D9D9B")
     static let darkGrey = Color(hex: "9D9D9B")
+    static let lightPurple = Color(hex: "ACACD1")
 }
 
-
+ 
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)

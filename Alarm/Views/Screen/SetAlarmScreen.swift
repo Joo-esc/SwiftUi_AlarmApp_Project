@@ -62,8 +62,7 @@ struct MissionSelectView : View {
 struct TimeSelectView: View {
     @State var startDate:Date = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
     
-    //    @State private var remainTime = computeTime(startDate: startDate, endDate: endDate)
-    var body: some View {
+        var body: some View {
         VStack (alignment: .center) {
             HStack () {
                 Spacer()
@@ -83,7 +82,6 @@ struct TimeSelectView: View {
             Spacer()
         }.roundRectify(8, .leading)
     }
-    
 }
 
 

@@ -34,10 +34,5 @@ struct RemainTime : View {
     }
 }
 
-//struct ComputeDateDistance: View {
-//    var body: some View {
-//        Text("Hello, World!")
-//    }
-//}
 
 
