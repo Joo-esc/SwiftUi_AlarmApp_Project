@@ -8,13 +8,14 @@ import SwiftUI
 struct MemorizeGameScreen: View {
     @ObservedObject var game: Memorize
     var body: some View {
+      
         NavigationView {
             ZStack {
                 Color.darkBackground.ignoresSafeArea()
+              
                 VStack() {
                     GameNumIndicator()
-                    GeometryReader { g in
-                        AspectVGrid(ScreenStyle.aspectRatio, ScreenStyle.cardSize, game.cards) { item in
+                        AspectVGrid(ScreenStyle.aspectRatio, game.cards) { item in
                             if item.isMatched {
                                 Rectangle().opacity(0.0)
                             } else {
@@ -25,8 +26,10 @@ struct MemorizeGameScreen: View {
                             }
                         }
                         Spacer()
-                    }
-                }.padding(.horizontal, ScreenStyle.horizonPad)
+                    Text("hi").responsiveTextify(14, .bold)
+                    
+                .padding(.horizontal, 16)
+                }
             } .hiddenNavBarStyle()
         }
     }
@@ -73,20 +76,20 @@ struct GameNumIndicator: View {
 
 
 
-//func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat) -> CGFloat {
-//    var columnCount = 1
-//    var rowCount = itemCount
-//    repeat {
-//        let itemWidth = size.width / CGFloat(columnCount)
-//        let itemHeight = itemWidth / itemAspectRatio
-//        if CGFloat(rowCount) * itemHeight < size.height {
-//            break
-//        }
-//        columnCount += 1
-//        rowCount = (itemCount + (columnCount - 1)) / columnCount
-//    } while columnCount < itemCount
-//    if columnCount > itemCount {
-//        columnCount = itemCount
-//    }
-//    return floor(size.width / CGFloat(columnCount))
-//}
+func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat) -> CGFloat {
+    var columnCount = 1
+    var rowCount = itemCount
+    repeat {
+        let itemWidth = size.width / CGFloat(columnCount)
+        let itemHeight = itemWidth / itemAspectRatio
+        if CGFloat(rowCount) * itemHeight < size.height {
+            break
+        }
+        columnCount += 1
+        rowCount = (itemCount + (columnCount - 1)) / columnCount
+    } while columnCount < itemCount
+    if columnCount > itemCount {
+        columnCount = itemCount
+    }
+    return floor(size.width / CGFloat(columnCount))
+}

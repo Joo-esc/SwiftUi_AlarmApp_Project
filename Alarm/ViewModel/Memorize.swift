@@ -9,7 +9,7 @@ class Memorize: ObservableObject {
     typealias Card = MemorizeModel<String>.Card
     static let emojiList = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🫐", "🍑", "🥭", "🍍"]
     
-    @Published private(set) var model: MemorizeModel<String> = MemorizeModel<String>(cardLength: 4) { emojiList[$0] }
+    @Published private(set) var model: MemorizeModel<String> = MemorizeModel<String>(cardLength: 8) { emojiList[$0] }
     
     var cards: [Card] {
         model.cards

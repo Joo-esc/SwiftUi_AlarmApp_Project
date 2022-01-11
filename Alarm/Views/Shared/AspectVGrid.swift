@@ -8,26 +8,37 @@ import SwiftUI
 
 struct AspectVGrid <ItemView>: View where ItemView: View {
     let aspectRatio: CGFloat
-    let cardSize: CGFloat
+//    let cardSize: CGFloat
     var items : [Memorize.Card]
     var content : (Memorize.Card) -> ItemView
-
-   
-    init(_ aspectRatio: CGFloat, _ cardSize: CGFloat, _ items: [Memorize.Card], @ViewBuilder _ content: @escaping (Memorize.Card) -> ItemView) {
+    
+    
+    init(_ aspectRatio: CGFloat,  _ items: [Memorize.Card], @ViewBuilder _ content: @escaping (Memorize.Card) -> ItemView) {
         self.aspectRatio = aspectRatio
-        self.cardSize = cardSize
+//        self.cardSize = cardSize
         self.items = items
         self.content = content
     }
-   
+    
     
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: cardSize))]) {
-            ForEach(items) { item in
-                content(item)
-                    .aspectRatio(aspectRatio, contentMode: .fit)
-              }
+        GeometryReader { g in
+            VStack {
+                LazyVGrid(columns: [adaptiveGriditem(width: widthThatFits(itemCount: items.count, in: g.size, itemAspectRatio: aspectRatio))], spacing: 0) {
+                    ForEach(items) { item in
+                        content(item)
+                            .aspectRatio(aspectRatio, contentMode: .fit)
+                            .padding(4)
+                    }
+                }
+            }
         }
     }
+
+private func adaptiveGriditem(width: CGFloat) -> GridItem {
+    var gridItem = GridItem(.adaptive(minimum: width))
+    gridItem.spacing = 0
+    return gridItem
+}
 }
 
