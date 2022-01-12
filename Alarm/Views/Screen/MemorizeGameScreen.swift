@@ -17,7 +17,10 @@ struct MemorizeGameScreen: View {
                         Text("SHUFFLE")
                             .responsiveTextify(14, .bold)
                             .onTapGesture {
-                                game.shuffleCard()
+                                withAnimation {
+                                    print("SHUFFLEÎ")
+                                    game.shuffleCard()
+                                }
                             }
                         GameNumIndicator()
                         AspectVGrid(ScreenStyle.aspectRatio, game.cards) { item in
@@ -32,7 +35,7 @@ struct MemorizeGameScreen: View {
                                     }
                             }
                         }
-                        TimeIndicator(geometry: g)
+                        TimeIndicator(geometry: g, shuffle: game.shuffleCard)
                     }
                 }.padding()
             }
@@ -52,12 +55,12 @@ struct MemorizeGameScreen: View {
 /*
  1. 기본 타이머 5분
  2. 시간이 종료되면 매칭된 카드들이 해제되고 카드가 섞임, 이후 타이머도 기본 설정값으로 리셋됨.
- 3. '+' 버튼을 클릭하면 타이머 시간이 10초 연장됨. (횟수 제한 없음)
  */
 
 struct TimeIndicator: View {
     @State var geometry: GeometryProxy
     @State var timeRemaining = 180
+    @State var shuffle: () -> Void
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let roundShape = RoundedRectangle(cornerRadius: 50)
     var body: some View {
@@ -97,10 +100,14 @@ struct TimeIndicator: View {
     private func computeReaminTiem () {
         // 남은 시간이 0보다 클 때 아래 연산 진행
         if timeRemaining > 0 {
-            timeRemaining -= 1
+            timeRemaining -= 60
         } else {
-            // 타이머 리셋
-            timeRemaining = Int(Style.remainTime)
+            withAnimation {
+                // 타이머 리셋
+                timeRemaining = Int(Style.remainTime)
+                // 카드 Shuffle
+                shuffle()
+            }
         }
     }
     

@@ -37,6 +37,11 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
         }
     }
     
+    // 카드 순서를 섞는 로직
+    mutating func shuffle() {
+        cards.shuffle()
+    }
+    
     init(cardLength: Int, createCardContent: (Int) -> CardContent) {
         cards = []
         // 초기화된 'cardLenght' 값에 따라 카드 쌍의 개수가 결정됨.
@@ -49,10 +54,6 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
         cards = cards.shuffled()
     }
     
-    mutating func shuffleCards() {
-        cards = []
-        cards = cards.shuffled()
-    }
     
     struct Card:Identifiable {
         var isSelected = true
