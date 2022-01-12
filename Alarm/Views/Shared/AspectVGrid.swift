@@ -18,7 +18,6 @@ struct AspectVGrid <ItemView>: View where ItemView: View {
         self.content = content
     }
     
-    
     var body: some View {
         GeometryReader { g in
             VStack {

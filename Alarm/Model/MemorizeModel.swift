@@ -14,7 +14,7 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
         // 카드가 하나 선택되었을 경우 선택된 카드의 id 값을 리턴하고 반대의 경우 nil 값을 리턴
         get { cards.indices.filter { cards[$0].isSelected}.onAndOnly }
         // 선택된 카드들만 'isSelected' Boolean 값을 false로 변경
-        set{cards.indices.forEach { if cards[$0].isSelected {cards[$0].isSelected = false}}}
+        set{ cards.indices.forEach { if cards[$0].isSelected {cards[$0].isSelected = false}} }
     }
     
     // 카드 컨텐츠 내용 확인, 동일 카드 선택 여부 판단
@@ -42,6 +42,15 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
         cards.shuffle()
     }
     
+    // 게임을 리셋, 모든 카드 아이템 값 초기화.
+    mutating func reset() {
+        cards.indices.forEach { if cards[$0].isSelected || cards[$0].isMatched {
+            cards[$0].isSelected = false
+            cards[$0].isMatched = false
+            }
+        }
+    }
+    
     init(cardLength: Int, createCardContent: (Int) -> CardContent) {
         cards = []
         // 초기화된 'cardLenght' 값에 따라 카드 쌍의 개수가 결정됨.
@@ -56,7 +65,7 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
     
     
     struct Card:Identifiable {
-        var isSelected = true
+        var isSelected = false
         var isMatched = false
         let content: CardContent
         let id: Int
