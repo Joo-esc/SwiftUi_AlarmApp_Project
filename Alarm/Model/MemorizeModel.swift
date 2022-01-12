@@ -49,8 +49,13 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
         cards = cards.shuffled()
     }
     
+    mutating func shuffleCards() {
+        cards = []
+        cards = cards.shuffled()
+    }
+    
     struct Card:Identifiable {
-        var isSelected = false
+        var isSelected = true
         var isMatched = false
         let content: CardContent
         let id: Int
