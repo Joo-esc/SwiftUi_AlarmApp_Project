@@ -8,6 +8,7 @@ import SwiftUI
 class Memorize: ObservableObject {
     static let emojiList = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🫐", "🍑", "🥭", "🍍"]
     
+    @Published var isFinished = false 
     @Published private(set) var length: Int
     @Published private(set) var currentRound: Int = 1
     @Published private(set) var totalRound:Int
@@ -45,6 +46,10 @@ class Memorize: ObservableObject {
         model.shuffle()
     }
     
+    func printAim() {
+        print("DUMMU TIME")
+    }
+    
     // 게임 초기화
     func resetGame() {
         model.reset()
@@ -55,7 +60,7 @@ class Memorize: ObservableObject {
         if currentRound < totalRound {
             currentRound += 1
         } else {
-            print("초과됨// 성공 메세지 전달")
+            isFinished = true
         }
         print("currentRound: \(currentRound)")
     }

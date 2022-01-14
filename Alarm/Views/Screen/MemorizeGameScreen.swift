@@ -7,18 +7,19 @@ import SwiftUI
 
 struct MemorizeGameScreen: View {
     @ObservedObject var game: Memorize
+    @State var routeCondition = false
+    
+    
+    
     
     var body: some View {
         NavigationView {
             ZStack {
+                NavigationLink(destination: SetAlarmScreen(), isActive: $routeCondition,
+                                   label: { EmptyView() })
                 Color.darkBackground.ignoresSafeArea()
                 GeometryReader { g in
                     VStack() {
-                        Text("Reset Time")
-                            .responsiveTextify(14, .bold)
-                            .onTapGesture {
-                               
-                            }
                         GameNumIndicator(currentRound: game.currentRound, totalRound: game.totalRound)
                         AspectVGrid(ScreenStyle.aspectRatio, game.cards) { item in
                             if item.isMatched {
@@ -42,7 +43,13 @@ struct MemorizeGameScreen: View {
                 }.padding()
             }
             .hiddenNavBarStyle()
+            .alert("기상 미션에 성공하셨습니다", isPresented: $game.isFinished) {
+                    Button("OK") {
+                        routeCondition = true
+                    }
+            }
         }
+       
     }
     private struct ScreenStyle {
         static let aspectRatio: CGFloat = 98/127
@@ -94,7 +101,7 @@ struct TimeIndicator: View {
             passedCountValue = timeRemaining
         }
     }
-       
+    
     // 차감된 시간 비율을 기준으로 ProgressBar 넓이를 계산
     private func countRatio()-> CGFloat {
         return geometry.size.width * (Double(timeRemaining) / Double(passedCountValue))
@@ -144,8 +151,8 @@ struct CardView: View {
 
 // 게임 횟수를 보여주는 인디케이터
 struct GameNumIndicator: View {
-     let currentRound: Int
-     let totalRound: Int
+    let currentRound: Int
+    let totalRound: Int
     
     var body: some View {
         HStack {
