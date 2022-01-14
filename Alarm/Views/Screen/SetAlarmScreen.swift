@@ -27,11 +27,6 @@ struct SetAlarmScreen: View {
     }
 }
 
-//Button(action: {
-//    print("Modal")
-//}) {
-//
-//}
 
 
 struct MissionSelectView : View {

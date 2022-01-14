@@ -6,17 +6,13 @@
 import SwiftUI
 
 struct MemorizeGameScreen: View {
-    @ObservedObject var game: Memorize
-    @State var routeCondition = false
-    
-    
-    
+    @ObservedObject var game: Memorize // VM
+    @State var routeCondition = false // Route 가능 여부에 대한 State 값.
     
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: SetAlarmScreen(), isActive: $routeCondition,
-                                   label: { EmptyView() })
+                RouteState()
                 Color.darkBackground.ignoresSafeArea()
                 GeometryReader { g in
                     VStack() {
@@ -44,13 +40,20 @@ struct MemorizeGameScreen: View {
             }
             .hiddenNavBarStyle()
             .alert("기상 미션에 성공하셨습니다", isPresented: $game.isFinished) {
-                    Button("OK") {
-                        routeCondition = true
-                    }
+                Button("OK") {
+                    routeCondition = true
+                }
             }
         }
-       
+        
     }
+    
+    // 미션 성공 AlertDialog Button에서 Binding Boolean 값을 true로 변경할 시, 스크린을 Route
+    func RouteState() -> NavigationLink<EmptyView, SetAlarmScreen> {
+        return NavigationLink(destination: SetAlarmScreen(), isActive: $routeCondition,
+                              label: { EmptyView() })
+    }
+    
     private struct ScreenStyle {
         static let aspectRatio: CGFloat = 98/127
         static let cardSize: CGFloat = 100
@@ -96,9 +99,6 @@ struct TimeIndicator: View {
                     .foregroundColor(.brandColor)
                     .animation(Animation.linear, value: countRatio())
             }
-        } .onAppear {
-            print("HI")
-            passedCountValue = timeRemaining
         }
     }
     
