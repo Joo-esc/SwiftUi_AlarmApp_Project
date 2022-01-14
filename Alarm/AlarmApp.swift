@@ -11,11 +11,12 @@ import SwiftUI
 struct AlarmApp: App {
     var body: some Scene {
         WindowGroup {
-              MemorizeGameScreen(game: Memorize())
-//            SetMissionDetailScreen(id: 1)
-//            ChooseMissionScreen(mission: Mission())
-//            AddEditAlarmScreen()
-//               MainScreen(week: Week())
+            
+            MemorizeGameScreen(game: Memorize(length: 2, totalRound: 4, countDonwTime: 60))
+            //            SetMissionDetailScreen(id: 1)
+            //            ChooseMissionScreen(mission: Mission())
+            //            AddEditAlarmScreen()
+            //               MainScreen(week: Week())
         }
     }
 }

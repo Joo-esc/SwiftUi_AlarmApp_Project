@@ -31,9 +31,9 @@ struct SetGameDetailScreen: View {
 struct BottomStackButton: View {
     var body: some View {
         HStack {
-            NavigationLink (destination: MemorizeGameScreen(game: Memorize())){
-                Text("미리보기").foregroundColor(.white)
-            }
+//            NavigationLink (destination: MemorizeGameScreen(game: Memorize())){
+//                Text("미리보기").foregroundColor(.white)
+//            }
             Spacer()
             Button(action: {
                 print("BUTTON IS SELECTED")

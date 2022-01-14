@@ -7,9 +7,7 @@ import SwiftUI
 
 struct MemorizeGameScreen: View {
     @ObservedObject var game: Memorize
-    @State var totalRound: Int = 3
-    @State var currentRound: Int = 1
-    @State var countTime: Int = 90
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -19,9 +17,9 @@ struct MemorizeGameScreen: View {
                         Text("Reset Time")
                             .responsiveTextify(14, .bold)
                             .onTapGesture {
-                                resetTime()
+                               
                             }
-                        GameNumIndicator(currentRound: $currentRound, totalRound: totalRound)
+                        GameNumIndicator(currentRound: game.currentRound, totalRound: game.totalRound)
                         AspectVGrid(ScreenStyle.aspectRatio, game.cards) { item in
                             if item.isMatched {
                                 Rectangle().opacity(0.0)
@@ -29,16 +27,16 @@ struct MemorizeGameScreen: View {
                                 CardView(card:item)
                                     .onTapGesture {
                                         withAnimation {
-                                            game.chooseCard(item, increaseRound: computeMatched, resetTime: resetTime)
+                                            game.chooseCard(item)
                                         }
                                     }
                             }
                         }
                         TimeIndicator(
                             geometry: g,
-                            timeRemaining: $countTime,
                             shuffle: game.shuffleCard,
-                            resetGame: game.resetGame
+                            timeRemaining: game.countDonwTime,
+                            passedCountValue: game.countDonwTime
                         )
                     }
                 }.padding()
@@ -46,20 +44,6 @@ struct MemorizeGameScreen: View {
             .hiddenNavBarStyle()
         }
     }
-    
-    func resetTime() {
-        countTime = 90
-    }
-    
-    func computeMatched() {
-        let cards = game.cards
-        let indicies =  cards.indices.filter {cards[$0].isMatched}
-        if indicies.count == cards.count {
-            currentRound += 1
-        }
-    }
-    
-    
     private struct ScreenStyle {
         static let aspectRatio: CGFloat = 98/127
         static let cardSize: CGFloat = 100
@@ -78,11 +62,12 @@ struct MemorizeGameScreen: View {
 
 struct TimeIndicator: View {
     @State var geometry: GeometryProxy
-    @Binding var timeRemaining: Int
     var shuffle: () -> Void
-    var resetGame: () -> Void
+    @State var timeRemaining: Int
+    @State var passedCountValue: Int  // Fetch Real Value When View Rendered
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let roundShape = RoundedRectangle(cornerRadius: 50)
+    
     var body: some View {
         HStack {
             // Timer Text Text
@@ -104,11 +89,15 @@ struct TimeIndicator: View {
                     .foregroundColor(.brandColor)
                     .animation(Animation.linear, value: countRatio())
             }
+        } .onAppear {
+            print("HI")
+            passedCountValue = timeRemaining
         }
     }
+       
     // 차감된 시간 비율을 기준으로 ProgressBar 넓이를 계산
     private func countRatio()-> CGFloat {
-        return geometry.size.width * (Double(timeRemaining) / Style.remainTime)
+        return geometry.size.width * (Double(timeRemaining) / Double(passedCountValue))
     }
     
     // 남은 시간을 보여주는 Text Indicator
@@ -120,11 +109,11 @@ struct TimeIndicator: View {
     private func computeReaminTiem () {
         // 남은 시간이 0보다 클 때 아래 연산 진행
         if timeRemaining > 0 {
-            timeRemaining -= 1
+            timeRemaining -= 10
         } else {
             withAnimation {
                 // 타이머 리셋
-                timeRemaining = Int(Style.remainTime)
+                timeRemaining = passedCountValue
                 // 카드 Shuffle
                 shuffle()
             }
@@ -132,12 +121,13 @@ struct TimeIndicator: View {
     }
     
     struct Style {
-        static let remainTime: Double = 90
+        static let remainTime: Double = 60.0
         static let textScale:CGFloat = 14
         static let tWrapperWidth: CGFloat = 50
         static let tWrapperHeight: CGFloat = 40
     }
 }
+
 
 
 
@@ -154,8 +144,8 @@ struct CardView: View {
 
 // 게임 횟수를 보여주는 인디케이터
 struct GameNumIndicator: View {
-    @Binding var currentRound: Int
-    let totalRound: Int
+     let currentRound: Int
+     let totalRound: Int
     
     var body: some View {
         HStack {

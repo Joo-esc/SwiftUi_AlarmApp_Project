@@ -6,19 +6,32 @@
 import SwiftUI
 
 class Memorize: ObservableObject {
-    typealias Card = MemorizeModel<String>.Card
     static let emojiList = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🫐", "🍑", "🥭", "🍍"]
     
-    @Published private(set) var model: MemorizeModel<String> = MemorizeModel<String>(cardLength: 2) { emojiList[$0] }
+    @Published private(set) var length: Int
+    @Published private(set) var currentRound: Int = 1
+    @Published private(set) var totalRound:Int
+    @Published private(set) var countDonwTime: Int
+    @Published private(set) var model: MemorizeModel<String>
+    
+    init(length: Int, totalRound: Int, countDonwTime: Int) {
+        self.length = length
+        self.totalRound = totalRound
+        self.countDonwTime = countDonwTime
+        self.model = MemorizeModel<String>(cardLength: length) { Memorize.emojiList[$0] }
+    }
+    
+
+    typealias Card = MemorizeModel<String>.Card
     
     var cards: [Card] {
         model.cards
     }
     
     //MARK: - Intent
-    func chooseCard(_ card: Card, increaseRound: () -> Void, resetTime: () -> Void)  {
+    func chooseCard(_ card: Card) {
         model.chooseCard(card)
-        // 모든 카드 매칭 될 때
+        // 모든 카드 매칭 될 때 (게임 초기화, 라운드 횟수 증가, 카드 믹스 동작 진행)
         let indicies =  cards.indices.filter {cards[$0].isMatched}
         if indicies.count == cards.count {
             resetGame()
@@ -27,12 +40,38 @@ class Memorize: ObservableObject {
         }
     }
     
+    // 카드 섞기
     func shuffleCard() {
         model.shuffle()
     }
     
+    // 게임 초기화
     func resetGame() {
         model.reset()
     }
+    
+    // 라운드 횟수 증가
+    func increaseRound() {
+        if currentRound < totalRound {
+            currentRound += 1
+        } else {
+            print("초과됨// 성공 메세지 전달")
+        }
+        print("currentRound: \(currentRound)")
+    }
+    
+    // 모든 카드가 매칭되었을 경우
+    func ifMatchedInc() {
+        let cards = model.cards
+        let indicies =  cards.indices.filter {cards[$0].isMatched}
+        if indicies.count == cards.count {
+            increaseRound()
+        }
+    }
+    
+   
 }
+
+
+
 
