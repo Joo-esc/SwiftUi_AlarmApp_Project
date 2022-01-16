@@ -10,8 +10,9 @@ import SwiftUI
 struct HiddenNavBarStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
+            .navigationBarTitleDisplayMode(.inline).navigationBarHidden(true)
+          
+       
     }
 }
 

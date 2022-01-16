@@ -13,7 +13,7 @@
 		6F5240BC2788B71B001C76D5 /* MissionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240BB2788B71B001C76D5 /* MissionModel.swift */; };
 		6F5240BE2788B7DB001C76D5 /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240BD2788B7DB001C76D5 /* Mission.swift */; };
 		6F5240C02788C2D0001C76D5 /* SetMissionDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240BF2788C2D0001C76D5 /* SetMissionDetailScreen.swift */; };
-		6F5240C52788D8A9001C76D5 /* SetGameDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240C42788D8A9001C76D5 /* SetGameDetailScreen.swift */; };
+		6F5240C52788D8A9001C76D5 /* SetMemorizeGameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240C42788D8A9001C76D5 /* SetMemorizeGameScreen.swift */; };
 		6F5240C727896B19001C76D5 /* MemorizeRangeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240C627896B19001C76D5 /* MemorizeRangeIndicator.swift */; };
 		6F5240C927896C83001C76D5 /* DifficultyRangeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240C827896C83001C76D5 /* DifficultyRangeIndicator.swift */; };
 		6F5240CB27898282001C76D5 /* RangeSideIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240CA27898282001C76D5 /* RangeSideIndicator.swift */; };
@@ -34,6 +34,9 @@
 		6FA3827D2786EE1A00F1948B /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA3827C2786EE1A00F1948B /* Week.swift */; };
 		6FA3827F278705ED00F1948B /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA3827E278705ED00F1948B /* FloatingActionButton.swift */; };
 		6FC8DE8827874038002344E4 /* SetAlarmScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8DE8727874038002344E4 /* SetAlarmScreen.swift */; };
+		6FF5AA7727942EF50078EA1B /* SetAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5AA7627942EF50078EA1B /* SetAlarm.swift */; };
+		6FF5AA7927942F010078EA1B /* SetAlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5AA7827942F010078EA1B /* SetAlarmModel.swift */; };
+		6FF5AA7B279449D10078EA1B /* MissionSelectSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5AA7A279449D10078EA1B /* MissionSelectSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +46,7 @@
 		6F5240BB2788B71B001C76D5 /* MissionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionModel.swift; sourceTree = "<group>"; };
 		6F5240BD2788B7DB001C76D5 /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
 		6F5240BF2788C2D0001C76D5 /* SetMissionDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMissionDetailScreen.swift; sourceTree = "<group>"; };
-		6F5240C42788D8A9001C76D5 /* SetGameDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameDetailScreen.swift; sourceTree = "<group>"; };
+		6F5240C42788D8A9001C76D5 /* SetMemorizeGameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMemorizeGameScreen.swift; sourceTree = "<group>"; };
 		6F5240C627896B19001C76D5 /* MemorizeRangeIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeRangeIndicator.swift; sourceTree = "<group>"; };
 		6F5240C827896C83001C76D5 /* DifficultyRangeIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyRangeIndicator.swift; sourceTree = "<group>"; };
 		6F5240CA27898282001C76D5 /* RangeSideIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSideIndicator.swift; sourceTree = "<group>"; };
@@ -65,6 +68,9 @@
 		6FA3827C2786EE1A00F1948B /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		6FA3827E278705ED00F1948B /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		6FC8DE8727874038002344E4 /* SetAlarmScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmScreen.swift; sourceTree = "<group>"; };
+		6FF5AA7627942EF50078EA1B /* SetAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarm.swift; sourceTree = "<group>"; };
+		6FF5AA7827942F010078EA1B /* SetAlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmModel.swift; sourceTree = "<group>"; };
+		6FF5AA7A279449D10078EA1B /* MissionSelectSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionSelectSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +138,7 @@
 				6FC8DE8727874038002344E4 /* SetAlarmScreen.swift */,
 				6F5240B92788980F001C76D5 /* ChooseMissionScreen.swift */,
 				6F5240BF2788C2D0001C76D5 /* SetMissionDetailScreen.swift */,
-				6F5240C42788D8A9001C76D5 /* SetGameDetailScreen.swift */,
+				6F5240C42788D8A9001C76D5 /* SetMemorizeGameScreen.swift */,
 				6F9234CB278A891A00AA6636 /* MemorizeGameScreen.swift */,
 			);
 			path = Screen;
@@ -160,6 +166,7 @@
 				6F5240CA27898282001C76D5 /* RangeSideIndicator.swift */,
 				6F9234CD278ADB9500AA6636 /* AspectVGrid.swift */,
 				6F783A5F278CB96200717EFC /* Cardify.swift */,
+				6FF5AA7A279449D10078EA1B /* MissionSelectSection.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -170,6 +177,7 @@
 				6FA382792786EE0500F1948B /* WeekModel.swift */,
 				6F5240BB2788B71B001C76D5 /* MissionModel.swift */,
 				6F9234D0278ADD0A00AA6636 /* MemorizeModel.swift */,
+				6FF5AA7827942F010078EA1B /* SetAlarmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 				6FA3827C2786EE1A00F1948B /* Week.swift */,
 				6F5240BD2788B7DB001C76D5 /* Mission.swift */,
 				6F9234D2278ADFEE00AA6636 /* Memorize.swift */,
+				6FF5AA7627942EF50078EA1B /* SetAlarm.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -259,9 +268,10 @@
 				6F735C3F2786144E00846817 /* ColorExtension.swift in Sources */,
 				6F783A60278CB96200717EFC /* Cardify.swift in Sources */,
 				6FA3827A2786EE0500F1948B /* WeekModel.swift in Sources */,
-				6F5240C52788D8A9001C76D5 /* SetGameDetailScreen.swift in Sources */,
+				6F5240C52788D8A9001C76D5 /* SetMemorizeGameScreen.swift in Sources */,
 				6F9234CE278ADB9500AA6636 /* AspectVGrid.swift in Sources */,
 				6F5240BE2788B7DB001C76D5 /* Mission.swift in Sources */,
+				6FF5AA7B279449D10078EA1B /* MissionSelectSection.swift in Sources */,
 				6FA3827D2786EE1A00F1948B /* Week.swift in Sources */,
 				6F5240CB27898282001C76D5 /* RangeSideIndicator.swift in Sources */,
 				6F5240C02788C2D0001C76D5 /* SetMissionDetailScreen.swift in Sources */,
@@ -271,11 +281,13 @@
 				6F5240BA2788980F001C76D5 /* ChooseMissionScreen.swift in Sources */,
 				6F735C3B2786115E00846817 /* MainScreen.swift in Sources */,
 				6F5240B827888FBE001C76D5 /* RoundRectify.swift in Sources */,
+				6FF5AA7727942EF50078EA1B /* SetAlarm.swift in Sources */,
 				6F5240C927896C83001C76D5 /* DifficultyRangeIndicator.swift in Sources */,
 				6F735C4227862B7100846817 /* ResponsiveTextify.swift in Sources */,
 				6F5240C727896B19001C76D5 /* MemorizeRangeIndicator.swift in Sources */,
 				6FA382762786ECBF00F1948B /* WeekItemModifier.swift in Sources */,
 				6FC8DE8827874038002344E4 /* SetAlarmScreen.swift in Sources */,
+				6FF5AA7927942F010078EA1B /* SetAlarmModel.swift in Sources */,
 				6F735C2B27860CF200846817 /* AlarmApp.swift in Sources */,
 				6F9234D1278ADD0A00AA6636 /* MemorizeModel.swift in Sources */,
 				6F9234CC278A891A00AA6636 /* MemorizeGameScreen.swift in Sources */,

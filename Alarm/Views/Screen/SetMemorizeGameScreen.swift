@@ -7,52 +7,49 @@
 
 import SwiftUI
 
-struct SetGameDetailScreen: View { 
+struct SetMemorizeGameScreen: View {
+    var setOption = SetAlarm()
+    @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     var body: some View {
             VStack (alignment: .leading){
                 Text("설정")
-                    .responsiveTextify(24, .medium)
+                    .responsiveTextify(Style.titleScale, .medium)
+                    .onTapGesture {
+                    }
                 Text("기억력 게임")
                     .foregroundColor(.darkGrey)
-                    .responsiveTextify(16, .medium)
-                    .padding(.bottom, 40)
+                    .responsiveTextify(Style.subTitleScale, .medium)
+                    .padding(.bottom, Style.sectionPadding)
                 SelectDifficultyView()
-                    .aspectRatio(330/177, contentMode: .fit)
-                    .padding(.bottom, 40)
+                    .aspectRatio(Style.rangeBox1, contentMode: .fit)
+                    .padding(.bottom, Style.sectionPadding)
                 SelectGameNumberView()
-                    .aspectRatio(330/217, contentMode: .fit)
+                    .aspectRatio(Style.rangeBox2, contentMode: .fit)
                 Spacer()
-                BottomStackButton()
+                BottomStackButton(goBack: goBack)
             }
-            .padding(.horizontal,20)
+            .padding(.horizontal,Style.bottomPadding)
+    }
+    
+    // 이전 스크린으로 돌아가는 Navigation 로직
+    func goBack(){
+          self.presentationMode.wrappedValue.dismiss()
+      }
+    
+    private struct Style {
+        static let titleScale: CGFloat = 24
+        static let subTitleScale: CGFloat = 16
+        static let sectionPadding: CGFloat = 40
+        static let rangeBox1: CGFloat = 330/177
+        static let rangeBox2: CGFloat = 330/217
+        static let bottomPadding: CGFloat = 20
+        
     }
 }
 
-struct BottomStackButton: View {
-    var body: some View {
-        HStack {
-//            NavigationLink (destination: MemorizeGameScreen(game: Memorize())){
-//                Text("미리보기").foregroundColor(.white)
-//            }
-            Spacer()
-            Button(action: {
-                print("BUTTON IS SELECTED")
-            }) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 100)
-                        .foregroundColor(.lightDark)
-                        .frame(width: 80, height: 50)
-                    Text("완료")
-                        .foregroundColor(.white)
-                }
-            }
-        }
-    }
-}
 
 
 struct SelectGameNumberView: View {
-    var colors = ["Red", "Green", "Blue", "Tartan"]
     @State var selectedColor = 3
     
     var body: some View {
@@ -103,4 +100,27 @@ struct SelectDifficultyView: View {
     }
 }
 
+struct BottomStackButton: View {
+    var goBack: () -> Void
+    var body: some View {
+        HStack {
+            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: 2, totalRound: 2, countDonwTime: 60))  ){
+                Text("미리보기").foregroundColor(.white)
+            }
+            Spacer()
+            Button(action: {
+                goBack()
+                print("AIM")
+            }) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 100)
+                        .foregroundColor(.lightDark)
+                        .frame(width: 80, height: 50)
+                    Text("완료")
+                        .foregroundColor(.white)
+                }
+            }
+        }
+    }
+}
 

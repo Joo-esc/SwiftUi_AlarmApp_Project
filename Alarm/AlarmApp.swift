@@ -12,10 +12,10 @@ struct AlarmApp: App {
     var body: some Scene {
         WindowGroup {
             
-            MemorizeGameScreen(game: Memorize(length: 2, totalRound: 2, countDonwTime: 60))
-            //            SetMissionDetailScreen(id: 1)
-            //            ChooseMissionScreen(mission: Mission())
-            //            AddEditAlarmScreen()
+//            MemorizeGameScreen(game: Memorize(length: 2, totalRound: 2, countDonwTime: 60))
+//                        SetMissionDetailScreen(id: 1)
+//                        ChooseMissionScreen(mission: Mission())
+            SetAlarmScreen()
             //               MainScreen(week: Week())
         }
     }

@@ -19,6 +19,7 @@ struct AspectVGrid <ItemView>: View where ItemView: View {
     }
     
     var body: some View {
+        ZStack {
         GeometryReader { g in
             VStack {
                 LazyVGrid(columns: [adaptiveGriditem(width: widthThatFits(itemCount: items.count, in: g.size, itemAspectRatio: aspectRatio))], spacing: 0) {
@@ -27,38 +28,41 @@ struct AspectVGrid <ItemView>: View where ItemView: View {
                             .aspectRatio(aspectRatio, contentMode: .fit)
                             .padding(4)
                     }
-                }
+                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                Spacer()
             }
         }
+           
     }
-    
-    
-    // LazyGridBiew Column GritItem 리턴문.
-    private func adaptiveGriditem(width: CGFloat) -> GridItem {
-        var gridItem = GridItem(.adaptive(minimum: width))
-        gridItem.spacing = 0
-        return gridItem
-    }
-    
-    
-    // 반응형 그리드뷰 아이템 사이즈 계산 로직
-    private func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat) -> CGFloat {
-        var columnCount = 1
-        var rowCount = itemCount
-        repeat {
-            let itemWidth = size.width / CGFloat(columnCount)
-            let itemHeight = itemWidth / itemAspectRatio
-            if CGFloat(rowCount) * itemHeight < size.height {
-                break
-            }
-            columnCount += 1
-            rowCount = (itemCount + (columnCount - 1)) / columnCount
-        } while columnCount < itemCount
-        if columnCount > itemCount {
-            columnCount = itemCount
+}
+
+
+// LazyGridBiew Column GritItem 리턴문.
+private func adaptiveGriditem(width: CGFloat) -> GridItem {
+    var gridItem = GridItem(.adaptive(minimum: width))
+    gridItem.spacing = 0
+    return gridItem
+}
+
+
+// 반응형 그리드뷰 아이템 사이즈 계산 로직
+private func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat) -> CGFloat {
+    var columnCount = 1
+    var rowCount = itemCount
+    repeat {
+        let itemWidth = size.width / CGFloat(columnCount)
+        let itemHeight = itemWidth / itemAspectRatio
+        if CGFloat(rowCount) * itemHeight < size.height {
+            break
         }
-        return floor(size.width / CGFloat(columnCount))
+        columnCount += 1
+        rowCount = (itemCount + (columnCount - 1)) / columnCount
+    } while columnCount < itemCount
+    if columnCount > itemCount {
+        columnCount = itemCount
     }
+    return floor(size.width / CGFloat(columnCount))
+}
 
 }
 

@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct SetAlarmScreen: View {
+    @ObservedObject var option = SetAlarm()
     var body: some View {
         NavigationView {
             ZStack {
                 Color.darkBackground.ignoresSafeArea()
                 VStack {
-                    TimeSelectView()
+                    TimeSelectView(startDate: $option.time)
                         .aspectRatio(330/181, contentMode: .fit)
-                    MissionSelectView()
-                        .aspectRatio(330/53, contentMode: .fit)
-                    
+                    MissionSelectSection(title: "미션", canRoute: true,
+                    selectedOption: nil
+                    )
                     Spacer()
                 }
                 .padding(.horizontal, 20)
@@ -27,36 +28,8 @@ struct SetAlarmScreen: View {
     }
 }
 
-
-
-struct MissionSelectView : View {
-    @State var selectedOption: String?
-    var body: some View {
-            ZStack {
-                HStack {
-                    Text("미션").responsiveTextify(12, .bold)
-                    Spacer()
-                    NavigationLink(destination: ChooseMissionScreen(mission: Mission())) {
-                        Text("선택안함")
-                        .foregroundColor(selectedOption != nil ? .brandColor : .lightGrey)}
-                        .responsiveTextify(12, .regular)
-                }
-            }
-        
-        .padding(.horizontal, 18)
-        .roundRectify(8, .leading)
-    }
-}
-
-
-/*
- - 초기 설정시 TimeSelecter에는 1분 뒤로 설정되어 있어햠
- - useEffect개념이 들어가 있어야할듯.
- */
-
 struct TimeSelectView: View {
-    @State var startDate:Date = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
-    
+    @Binding var startDate:Date
         var body: some View {
         VStack (alignment: .center) {
             HStack () {
@@ -66,7 +39,11 @@ struct TimeSelectView: View {
                     .foregroundColor(.white)
                 RemainTime(startDate : $startDate)
                 Spacer()
-            }.padding(.top, 14)
+            }
+            .padding(.top, 14)
+            .onTapGesture {
+                print(startDate)
+            }
             Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
             DatePicker("", selection: $startDate,
                        displayedComponents: .hourAndMinute)
@@ -79,9 +56,33 @@ struct TimeSelectView: View {
     }
 }
 
+/*
+ - 초기 설정시 TimeSelecter에는 1분 뒤로 설정되어 있어햠
+ - useEffect개념이 들어가 있어야할듯.
+ */
 
-struct AddEditAlarmScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        SetAlarmScreen()
-    }
-}
+
+
+//struct MissionSelectView : View {
+//    @State var selectedOption: String?
+//    var body: some View {
+//            ZStack {
+//                HStack {
+//                    Text("미션").responsiveTextify(12, .bold)
+//                    Spacer()
+//                    NavigationLink(destination: ChooseMissionScreen(mission: Mission())) {
+//                        Text("선택안함")
+//                        .foregroundColor(selectedOption != nil ? .brandColor : .lightGrey)}
+//                        .responsiveTextify(12, .regular)
+//                }
+//            }
+//
+//        .padding(.horizontal, 18)
+//        .roundRectify(8, .leading)
+//    }
+//}
+//
+//
+//
+
+

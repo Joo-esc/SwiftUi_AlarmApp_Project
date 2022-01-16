@@ -6,14 +6,20 @@
 import SwiftUI
 
 struct SetMissionDetailScreen: View {
+    var option = SetAlarm()
     let id: Int
     var body: some View {
-        NavigationView {
             ZStack(alignment: .topLeading) {
                 Color.darkBackground.ignoresSafeArea()
                 switch id {
+                case 0:
+                    SetMemorizeGameScreen()
+                        .onAppear {
+                            // 미션 종류를 Model에 Store함.
+                            option.missionType = 0
+                        }
                 case 1:
-                    SetGameDetailScreen()
+                    MathGame()
                 case 2:
                     MathGame()
                     // or else
@@ -22,7 +28,6 @@ struct SetMissionDetailScreen: View {
                 }
             }.hiddenNavBarStyle()
         }
-    }
 }
 
 

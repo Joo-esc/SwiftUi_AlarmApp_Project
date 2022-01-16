@@ -14,25 +14,24 @@ struct ChooseMissionScreen: View {
         NavigationView {
             ZStack {
                 Color.darkBackground.ignoresSafeArea()
-                Text("AIM").foregroundColor(.white)
-                    .onTapGesture {
-
-                    }
-                VStack(alignment: .leading) {
-                    Text("미션을 선택해주세요").responsiveTextify(ScreenStyle.titleFontSize, .medium)
-                    LazyVGrid (columns: itemColumns, spacing: ScreenStyle.gridSpacing ) {
-                        ForEach(mission.missions, id:\.self) { item in
-                            NavigationLink (destination: SetMissionDetailScreen(id: item.id)){
-                                MissionItemView(mission: item)
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Text("미션을 선택해주세요").responsiveTextify(ScreenStyle.titleFontSize, .medium)
+                        LazyVGrid (columns: itemColumns, spacing: ScreenStyle.gridSpacing ) {
+                            ForEach(mission.missions, id:\.self) { item in
+                                NavigationLink (destination: SetMissionDetailScreen(id: item.id).hiddenNavBarStyle
+                                ){
+                                    MissionItemView(mission: item)
+                                }
                             }
+                            .aspectRatio(ScreenStyle.itemGridRation, contentMode: .fit)
                         }
-                        .aspectRatio(ScreenStyle.itemGridRation, contentMode: .fit)
+                        Spacer()
                     }
-                    Spacer()
+                    .padding(.horizontal, 20)
                 }
-                .padding(.horizontal, 20)
             }.hiddenNavBarStyle()
-        }
+        }.navigationBarBackButtonHidden(true)
     }
     private struct ScreenStyle {
         static let titleFontSize: CGFloat = 24

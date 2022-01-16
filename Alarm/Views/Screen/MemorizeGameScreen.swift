@@ -3,19 +3,23 @@
 //  Created by 이해주 on 2022/01/09.
 //
 
+/* MARK: - TODO
+ 1) Navigation, Route Back (pop).
+ */
+
 import SwiftUI
 
 struct MemorizeGameScreen: View {
     @ObservedObject var game: Memorize // VM
     @State var routeCondition = false // Route 가능 여부에 대한 State 값.
+    @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     
     var body: some View {
         NavigationView {
-            ZStack {
-                RouteState()
+            ZStack() {
                 Color.darkBackground.ignoresSafeArea()
                 GeometryReader { g in
-                    VStack() {
+                    VStack(alignment: .leading) {
                         GameNumIndicator(currentRound: game.currentRound, totalRound: game.totalRound)
                         AspectVGrid(ScreenStyle.aspectRatio, game.cards) { item in
                             if item.isMatched {
@@ -29,39 +33,59 @@ struct MemorizeGameScreen: View {
                                     }
                             }
                         }
+                        EmptyView()
                         TimeIndicator(
                             geometry: g,
                             shuffle: game.shuffleCard,
                             timeRemaining: game.countDonwTime,
                             passedCountValue: game.countDonwTime
                         )
+                        BottomCompleteButton(goBack: goBack)
+                        Spacer()
                     }
                 }.padding()
             }
-            .hiddenNavBarStyle()
             .alert("기상 미션에 성공하셨습니다", isPresented: $game.isFinished) {
-                Button("OK") {
-                    routeCondition = true
+                Button("확인") {
+                    goBack()
                 }
-            }
-        }
+            }.hiddenNavBarStyle()
+        }.hiddenNavBarStyle()
         
     }
-    
-    // 미션 성공 AlertDialog Button에서 Binding Boolean 값을 true로 변경할 시, 스크린을 Route
-    func RouteState() -> NavigationLink<EmptyView, SetAlarmScreen> {
-        return NavigationLink(destination: SetAlarmScreen(), isActive: $routeCondition,
-                              label: { EmptyView() })
-    }
-    
     private struct ScreenStyle {
         static let aspectRatio: CGFloat = 98/127
         static let cardSize: CGFloat = 100
         static let horizonPad: CGFloat = 20
     }
     
-    
+    // 이전 스크린으로 돌아가는 Navigation 로직
+    func goBack(){
+          self.presentationMode.wrappedValue.dismiss()
+      }
 }
+
+
+// 하단 완료 버튼 뷰
+struct BottomCompleteButton: View {
+    var goBack: () -> Void
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var body: some View {
+        HStack {
+            Spacer()
+            Button {
+                goBack()
+            } label: {
+                ZStack {
+                    Text("완료").responsiveTextify(14, .bold)
+                }
+                .roundRectify(32, .center)
+                .frame(width: 82, height: 50, alignment: .center)
+            }
+        }
+    }
+}
+
 
 
 //MARK: - 타이머 로직
@@ -92,7 +116,7 @@ struct TimeIndicator: View {
             // Progress Bar
             ZStack(alignment: .leading) {
                 roundShape
-                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 6, alignment: .leading)
+                    .frame(minWidth: 0, maxHeight: 6, alignment: .leading)
                     .foregroundColor(.white)
                 roundShape
                     .frame(minWidth: 0, maxWidth: countRatio(), maxHeight: 6, alignment: .topLeading)
@@ -100,6 +124,8 @@ struct TimeIndicator: View {
                     .animation(Animation.linear, value: countRatio())
             }
         }
+        .frame(height: 20)
+        .foregroundColor(.white)
     }
     
     // 차감된 시간 비율을 기준으로 ProgressBar 넓이를 계산
