@@ -23,7 +23,7 @@ struct SetAlarmModel {
         var missionType: Int?
         var selectedDay: Date? // 선택된 요일이 있을 경우 반복 X, 반대의 경우 반복 허용
         var label: String? // 선택된 문구가 없을 경우 nil 값으로 문구 선택 여부를 판별
-        var gameLevel: Int = 0
-        var gameRound: Int = 1
+        var gameLevel: Int?
+        var gameRound: Int?
     }
 }

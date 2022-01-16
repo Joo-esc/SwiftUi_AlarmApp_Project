@@ -13,6 +13,8 @@ class SetAlarm: ObservableObject {
     @Published var model: SetAlarmModel = SetAlarmModel(id: 3)
     @Published var time = Date()
     @Published var missionType: Int?
+    @Published var level: Double = 0.0
+    @Published var round: Int = 3
  
     
     var options: Option {

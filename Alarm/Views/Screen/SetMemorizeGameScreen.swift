@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SetMemorizeGameScreen: View {
-    var setOption = SetAlarm()
+    let selectedType: Int
+    @State var option: SetAlarm
     @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     var body: some View {
             VStack (alignment: .leading){
@@ -20,13 +21,14 @@ struct SetMemorizeGameScreen: View {
                     .foregroundColor(.darkGrey)
                     .responsiveTextify(Style.subTitleScale, .medium)
                     .padding(.bottom, Style.sectionPadding)
-                SelectDifficultyView()
+                SelectDifficultyView(selectedLevel: option.level, option: option)
                     .aspectRatio(Style.rangeBox1, contentMode: .fit)
                     .padding(.bottom, Style.sectionPadding)
-                SelectGameNumberView()
+                SelectGameNumberView(selectedRound: $option.round)
                     .aspectRatio(Style.rangeBox2, contentMode: .fit)
                 Spacer()
-                BottomStackButton(goBack: goBack)
+
+                BottomStackButton(goBack: goBack, option: option, setOptions: completeFunc)
             }
             .padding(.horizontal,Style.bottomPadding)
     }
@@ -35,6 +37,11 @@ struct SetMemorizeGameScreen: View {
     func goBack(){
           self.presentationMode.wrappedValue.dismiss()
       }
+    
+    // 변경된 State을 최정적으로 Store하는 로직, '완료 버튼 클릭 시' 
+    func completeFunc() {
+        option.missionType = selectedType
+    }
     
     private struct Style {
         static let titleScale: CGFloat = 24
@@ -49,9 +56,10 @@ struct SetMemorizeGameScreen: View {
 
 
 
+// 문제 개수를 설정하는 뷰
+
 struct SelectGameNumberView: View {
-    @State var selectedColor = 3
-    
+    @Binding var selectedRound: Int
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -61,7 +69,7 @@ struct SelectGameNumberView: View {
                     .responsiveTextify(12, .medium)
             }
             VStack {
-                Picker(selection: $selectedColor, label: Text("Please choose a color")) {
+                Picker(selection: $selectedRound, label: Text("Please choose a color")) {
                     ForEach(0..<20) { index in
                         Text(String(index))
                             .foregroundColor(.white)
@@ -75,24 +83,28 @@ struct SelectGameNumberView: View {
 }
 
 
+// 문제 난이도를 설정하는 뷰
+
 struct SelectDifficultyView: View {
-    @State private var speed = 0.0
+    @State var selectedLevel: Double
+    @State var option: SetAlarm
+   
     @State private var isEditing = false
     var body: some View {
         VStack(alignment: .leading){
             Text("난이도")
                 .responsiveTextify(14, .bold)
             VStack {
-                
-                DifficultyRangeIndicator(selectedLevel: speed)
-                MemorizeRangeIndicator(selectedLevel: speed)
+                DifficultyRangeIndicator(selectedLevel: selectedLevel)
+                MemorizeRangeIndicator(selectedLevel: selectedLevel)
                     .foregroundColor(.darkGrey)
                     .responsiveTextify(12, .medium)
-                Slider(value: $speed, in: 0...4, step: 1) { editing in
-                    isEditing = editing
+                Slider(value: $selectedLevel, in: 0...4, step: 1) { _ in
+                    option.level = selectedLevel
                 }
                 .tint(.brandColor)
                 .padding(.horizontal, 20)
+                
                 RangeSideIndicator()
             }
             .roundRectify(8, .center)
@@ -102,15 +114,17 @@ struct SelectDifficultyView: View {
 
 struct BottomStackButton: View {
     var goBack: () -> Void
+    @State var option: SetAlarm
+    let setOptions: () -> Void
     var body: some View {
         HStack {
-            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: 2, totalRound: 2, countDonwTime: 60))  ){
+            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: option.level + 2.0, totalRound: option.round, countDonwTime: 60))  ){
                 Text("미리보기").foregroundColor(.white)
             }
             Spacer()
             Button(action: {
+                setOptions()
                 goBack()
-                print("AIM")
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 100)

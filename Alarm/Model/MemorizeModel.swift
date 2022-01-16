@@ -51,10 +51,10 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
         }
     }
     
-    init(cardLength: Int, createCardContent: (Int) -> CardContent) {
+    init(cardLength: Double, createCardContent: (Int) -> CardContent) {
         cards = []
         // 초기화된 'cardLenght' 값에 따라 카드 쌍의 개수가 결정됨.
-        for index in 0 ..< cardLength {
+        for index in 0 ..< Int(cardLength) {
             let content = createCardContent(index)
             cards.append(Card(content: content, id: index * 2))
             cards.append(Card(content: content, id: index * 2 + 1))

@@ -14,10 +14,15 @@ struct SetAlarmScreen: View {
             ZStack {
                 Color.darkBackground.ignoresSafeArea()
                 VStack {
+                    Text("check").responsiveTextify(13, .bold)
+                        .onTapGesture {
+                            print(option.round)
+                        }
                     TimeSelectView(startDate: $option.time)
                         .aspectRatio(330/181, contentMode: .fit)
                     MissionSelectSection(title: "미션", canRoute: true,
-                    selectedOption: nil
+                                         option: option,
+                                         selectedType: option.missionType
                     )
                     Spacer()
                 }
@@ -30,7 +35,8 @@ struct SetAlarmScreen: View {
 
 struct TimeSelectView: View {
     @Binding var startDate:Date
-        var body: some View {
+    
+    var body: some View {
         VStack (alignment: .center) {
             HStack () {
                 Spacer()

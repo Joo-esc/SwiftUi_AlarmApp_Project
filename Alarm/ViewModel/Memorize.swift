@@ -9,13 +9,13 @@ class Memorize: ObservableObject {
     static let emojiList = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🫐", "🍑", "🥭", "🍍"]
     
     @Published var isFinished = false 
-    @Published private(set) var length: Int
+    @Published private(set) var length: Double
     @Published private(set) var currentRound: Int = 1
     @Published private(set) var totalRound:Int
     @Published private(set) var countDonwTime: Int
     @Published private(set) var model: MemorizeModel<String>
     
-    init(length: Int, totalRound: Int, countDonwTime: Int) {
+    init(length: Double, totalRound: Int, countDonwTime: Int) {
         self.length = length
         self.totalRound = totalRound
         self.countDonwTime = countDonwTime

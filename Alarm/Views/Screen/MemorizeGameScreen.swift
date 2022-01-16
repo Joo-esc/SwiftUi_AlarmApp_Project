@@ -3,10 +3,6 @@
 //  Created by 이해주 on 2022/01/09.
 //
 
-/* MARK: - TODO
- 1) Navigation, Route Back (pop).
- */
-
 import SwiftUI
 
 struct MemorizeGameScreen: View {
@@ -40,18 +36,20 @@ struct MemorizeGameScreen: View {
                             timeRemaining: game.countDonwTime,
                             passedCountValue: game.countDonwTime
                         )
-                        BottomCompleteButton(goBack: goBack)
+                        BottomDivStackButton(isDivided: false, leftTitle: nil, leftAction: goBack, rightTitle: "완료", rightAction: goBack)
                         Spacer()
                     }
                 }.padding()
             }
+            .onAppear(perform: {
+                print(game.length)
+            })
             .alert("기상 미션에 성공하셨습니다", isPresented: $game.isFinished) {
                 Button("확인") {
                     goBack()
                 }
             }.hiddenNavBarStyle()
         }.hiddenNavBarStyle()
-        
     }
     private struct ScreenStyle {
         static let aspectRatio: CGFloat = 98/127
@@ -63,27 +61,6 @@ struct MemorizeGameScreen: View {
     func goBack(){
           self.presentationMode.wrappedValue.dismiss()
       }
-}
-
-
-// 하단 완료 버튼 뷰
-struct BottomCompleteButton: View {
-    var goBack: () -> Void
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    var body: some View {
-        HStack {
-            Spacer()
-            Button {
-                goBack()
-            } label: {
-                ZStack {
-                    Text("완료").responsiveTextify(14, .bold)
-                }
-                .roundRectify(32, .center)
-                .frame(width: 82, height: 50, alignment: .center)
-            }
-        }
-    }
 }
 
 

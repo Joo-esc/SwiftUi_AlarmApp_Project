@@ -6,36 +6,25 @@
 import SwiftUI
 
 struct SetMissionDetailScreen: View {
-    var option = SetAlarm()
+    let option: SetAlarm // Link ViewModel
     let id: Int
     var body: some View {
             ZStack(alignment: .topLeading) {
                 Color.darkBackground.ignoresSafeArea()
                 switch id {
                 case 0:
-                    SetMemorizeGameScreen()
-                        .onAppear {
-                            // 미션 종류를 Model에 Store함.
-                            option.missionType = 0
-                        }
+                    SetMemorizeGameScreen(selectedType: 0, option: option)
                 case 1:
-                    MathGame()
+                    MathGameScreen()
                 case 2:
-                    MathGame()
+                    OtherGameScreen()
                     // or else
                 default:
-                    MathGame()
+                    OtherGameScreen()
                 }
             }.hiddenNavBarStyle()
         }
 }
 
-
-
-struct MathGame: View {
-    var body: some View {
-        Text("Math GAME")
-    }
-}
 
 
