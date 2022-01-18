@@ -26,7 +26,7 @@ struct SetAlarmScreen: View {
                                          option: option,
                                          selectedType: option.missionType
                     )
-                    DaySelectSection()
+                    DaySelectSection(option: option, weekList: option.selectedDays)
                     Spacer()
                 }
                 .padding(.horizontal, 20)
@@ -48,23 +48,41 @@ struct SetAlarmScreen: View {
 
 
 struct DaySelectSection: View {
-    var isSelected = false
+    @State var isSelected = false
+    var option: SetAlarm
+    var weekList: [Week.Day]
+    var selectedDays: String? {
+        get {
+            var aim = weekList.indices.filter {weekList[$0].isSelected}
+            if aim.count > 0 {
+                var tempList: [String] = []
+                for index in aim {
+                    tempList.append(weekList[index].content)
+                }
+                let joined = tempList.joined(separator: ", ")
+                return joined
+            } else {
+                return nil
+            }
+        }
+    }
+
     var body: some View {
         ZStack {
             HStack {
                 Text("반복").responsiveTextify(12, .bold)
                 Spacer()
-                Text("선택안함")
-                    .foregroundColor(isSelected ? .brandColor : .lightGrey)
+                Text(selectedDays ?? "선택안함")
+                    .foregroundColor(selectedDays != nil ? .brandColor : .lightGrey)
                     .responsiveTextify(12, .regular)
             }
-            
         }
         
         .padding(.horizontal, 18)
         .roundRectify(8, .leading)
         .aspectRatio(330/53, contentMode: .fit)
     }
+    
 }
 
 

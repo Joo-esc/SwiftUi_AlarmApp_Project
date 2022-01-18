@@ -3,7 +3,7 @@
 // DayOfWeekList View에서 사용되는 뷰모델
 
 
-import Foundation
+import SwiftUI
 
 class Week {
     typealias Day = WeekModel.Week

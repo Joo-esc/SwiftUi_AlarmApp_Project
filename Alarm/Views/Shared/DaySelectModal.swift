@@ -50,7 +50,7 @@ struct DaySelectModal: View {
                     
                 }
                 // 요일 리스트 뷰
-                ForEach (week.weekList) {item in
+                ForEach (option.selectedDays) {item in
                     HStack {
                         Text(item.content)
                             .foregroundColor(.black)
@@ -94,7 +94,7 @@ struct CheckBoxView: View {
     // 특정 요일을 클릭했을 때.
     func selectDayHandler() {
         self.checked.toggle()
-        day.chooseDay(item)
+        option.chooseDay(item)
     }
 }
 
