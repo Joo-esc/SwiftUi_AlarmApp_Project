@@ -9,14 +9,16 @@ import SwiftUI
 
 struct SetAlarmScreen: View {
     @ObservedObject var option = SetAlarm()
+    @State private var isModalShow = true
+    
     var body: some View {
         NavigationView {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 Color.darkBackground.ignoresSafeArea()
                 VStack {
                     Text("check").responsiveTextify(13, .bold)
                         .onTapGesture {
-                            print(option.round)
+                            showModal()
                         }
                     TimeSelectView(startDate: $option.time)
                         .aspectRatio(330/181, contentMode: .fit)
@@ -24,16 +26,51 @@ struct SetAlarmScreen: View {
                                          option: option,
                                          selectedType: option.missionType
                     )
+                    DaySelectSection()
                     Spacer()
                 }
                 .padding(.horizontal, 20)
+                // MARK: - Modal Pop up
+                GeometryReader { g in
+                    DaySelectModal(showModal: $isModalShow, option: option, screenHeight: g.size.height * 0.6)
+                }
             }
             .hiddenNavBarStyle()
         }
     }
+    
+    func showModal() {
+            isModalShow.toggle()
+    }
 }
 
+
+
+
+struct DaySelectSection: View {
+    var isSelected = false
+    var body: some View {
+        ZStack {
+            HStack {
+                Text("반복").responsiveTextify(12, .bold)
+                Spacer()
+                Text("선택안함")
+                    .foregroundColor(isSelected ? .brandColor : .lightGrey)
+                    .responsiveTextify(12, .regular)
+            }
+            
+        }
+        
+        .padding(.horizontal, 18)
+        .roundRectify(8, .leading)
+        .aspectRatio(330/53, contentMode: .fit)
+    }
+}
+
+
+
 struct TimeSelectView: View {
+    
     @Binding var startDate:Date
     
     var body: some View {
@@ -61,34 +98,5 @@ struct TimeSelectView: View {
         }.roundRectify(8, .leading)
     }
 }
-
-/*
- - 초기 설정시 TimeSelecter에는 1분 뒤로 설정되어 있어햠
- - useEffect개념이 들어가 있어야할듯.
- */
-
-
-
-//struct MissionSelectView : View {
-//    @State var selectedOption: String?
-//    var body: some View {
-//            ZStack {
-//                HStack {
-//                    Text("미션").responsiveTextify(12, .bold)
-//                    Spacer()
-//                    NavigationLink(destination: ChooseMissionScreen(mission: Mission())) {
-//                        Text("선택안함")
-//                        .foregroundColor(selectedOption != nil ? .brandColor : .lightGrey)}
-//                        .responsiveTextify(12, .regular)
-//                }
-//            }
-//
-//        .padding(.horizontal, 18)
-//        .roundRectify(8, .leading)
-//    }
-//}
-//
-//
-//
 
 

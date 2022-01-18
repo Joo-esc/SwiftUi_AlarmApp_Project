@@ -15,6 +15,7 @@ class SetAlarm: ObservableObject {
     @Published var missionType: Int?
     @Published var level: Double = 0.0
     @Published var round: Int = 3
+    @Published var selectedDay = Week.tempWeekList // 선택된 요일
  
     
     var options: Option {

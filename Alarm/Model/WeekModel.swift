@@ -8,6 +8,7 @@ import Foundation
 struct WeekModel {
     private(set) var weekItem: [Week]
     
+    
     func chooseWeek(_ week: Week) {
         print(week)
     }
@@ -18,7 +19,6 @@ struct WeekModel {
         for index in 0..<7 {
             weekItem.append(Week(content: createContent(index), id: index))
         }
-        
     }
     
     struct Week: Identifiable {
