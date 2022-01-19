@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F520840279893540022352C /* DaySelectSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F52083F279893540022352C /* DaySelectSection.swift */; };
+		6F5208422798979B0022352C /* TimeSelectSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5208412798979B0022352C /* TimeSelectSection.swift */; };
+		6F520844279898120022352C /* LabelSelectSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F520843279898120022352C /* LabelSelectSection.swift */; };
 		6F5240B427886EA4001C76D5 /* RemainTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240B327886EA4001C76D5 /* RemainTime.swift */; };
 		6F5240B827888FBE001C76D5 /* RoundRectify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240B727888FBE001C76D5 /* RoundRectify.swift */; };
 		6F5240BA2788980F001C76D5 /* ChooseMissionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5240B92788980F001C76D5 /* ChooseMissionScreen.swift */; };
@@ -44,6 +47,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F52083F279893540022352C /* DaySelectSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySelectSection.swift; sourceTree = "<group>"; };
+		6F5208412798979B0022352C /* TimeSelectSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectSection.swift; sourceTree = "<group>"; };
+		6F520843279898120022352C /* LabelSelectSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSelectSection.swift; sourceTree = "<group>"; };
 		6F5240B327886EA4001C76D5 /* RemainTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemainTime.swift; sourceTree = "<group>"; };
 		6F5240B727888FBE001C76D5 /* RoundRectify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectify.swift; sourceTree = "<group>"; };
 		6F5240B92788980F001C76D5 /* ChooseMissionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMissionScreen.swift; sourceTree = "<group>"; };
@@ -179,6 +185,9 @@
 				6FF5AA7A279449D10078EA1B /* MissionSelectSection.swift */,
 				6F64AACC2794A30900E183F5 /* BottomDivStackButton.swift */,
 				6F6F7E632796E36600E4D505 /* DaySelectModal.swift */,
+				6F52083F279893540022352C /* DaySelectSection.swift */,
+				6F5208412798979B0022352C /* TimeSelectSection.swift */,
+				6F520843279898120022352C /* LabelSelectSection.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -275,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5208422798979B0022352C /* TimeSelectSection.swift in Sources */,
 				6F69129D2787584900314809 /* HiddenNavBarStyle.swift in Sources */,
 				6F64AAD02794A67600E183F5 /* MathGameScreen.swift in Sources */,
 				6F9234D3278ADFEE00AA6636 /* Memorize.swift in Sources */,
@@ -284,6 +294,7 @@
 				6F5240C52788D8A9001C76D5 /* SetMemorizeGameScreen.swift in Sources */,
 				6F9234CE278ADB9500AA6636 /* AspectVGrid.swift in Sources */,
 				6F64AACD2794A30900E183F5 /* BottomDivStackButton.swift in Sources */,
+				6F520840279893540022352C /* DaySelectSection.swift in Sources */,
 				6F5240BE2788B7DB001C76D5 /* Mission.swift in Sources */,
 				6FF5AA7B279449D10078EA1B /* MissionSelectSection.swift in Sources */,
 				6FA3827D2786EE1A00F1948B /* Week.swift in Sources */,
@@ -291,6 +302,7 @@
 				6F5240C02788C2D0001C76D5 /* SetMissionDetailScreen.swift in Sources */,
 				6F5240BC2788B71B001C76D5 /* MissionModel.swift in Sources */,
 				6F5240B427886EA4001C76D5 /* RemainTime.swift in Sources */,
+				6F520844279898120022352C /* LabelSelectSection.swift in Sources */,
 				6F64AAD22794A69800E183F5 /* OtherGameScreen.swift in Sources */,
 				6FA3827F278705ED00F1948B /* FloatingActionButton.swift in Sources */,
 				6F5240BA2788980F001C76D5 /* ChooseMissionScreen.swift in Sources */,
