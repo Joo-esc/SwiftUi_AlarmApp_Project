@@ -16,11 +16,11 @@ struct RoundRectify: ViewModifier {
         self.cornerRadius = cornerRadius
         self.alignment = alignment
         self.backgroundColor = backgroundColor
-
+        
     }
     
     func body(content: Content) -> some View {
-        ZStack (alignment: alignment)                  {
+        ZStack (alignment: alignment) {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .shadow(color: .black.opacity(0.25), radius: 5)
             content

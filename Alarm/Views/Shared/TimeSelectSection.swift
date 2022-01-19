@@ -20,18 +20,17 @@ struct TimeSelectSection: View {
                 Spacer()
             }
             .padding(.top, Style.tPadding)
-            .onTapGesture {
-                print(startDate)
-            }
             Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
             DatePicker("", selection: $startDate,
                        displayedComponents: .hourAndMinute)
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
                 .colorInvert().colorMultiply(.white)
+                .padding(.horizontal, 6)
             Spacer()
         }
         .roundRectify(Style.containerRadius, .leading)
+        .frame(maxWidth: .infinity)
         .aspectRatio(Style.containerRatio, contentMode: .fit)
     }
     
@@ -42,4 +41,3 @@ struct TimeSelectSection: View {
         static let containerRatio: CGFloat = 330/181
     }
 }
-

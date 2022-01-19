@@ -16,6 +16,7 @@ class SetAlarm: ObservableObject {
     @Published var level: Double = 0.0
     @Published var round: Int = 3
     @Published var selectedDays = Week().weekList
+    @Published var label: String?
     
     // 선택된 요일의 'isSelect' 프로퍼티를 toggle
     func chooseDay(_ day: Week.Day) {

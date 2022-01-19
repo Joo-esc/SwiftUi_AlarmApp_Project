@@ -1,6 +1,5 @@
 //
-//  AddEditAlarmScreen.swift
-//  Alarm
+//  알람 옵션을 선택하는 스크린. 모든 옵션값을 설정하는 섹션의 기준이됨.
 //
 //  Created by 이해주 on 2022/01/07.
 //
@@ -20,6 +19,7 @@ struct SetAlarmScreen: View {
                     MissionSelectSection(option: option, selectedType: option.missionType
                     )
                     DaySelectSection(option: option, weekList: option.selectedDays, showModal: showModal)
+                    LabelSelectSection(option: option, label: option.label)
                     Spacer()
                     BottomDivStackButton(isDivided: true, leftTitle: "취소", leftAction: showModal, rightTitle: "저장", rightAction: showModal)
                 }
