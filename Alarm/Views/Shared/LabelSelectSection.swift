@@ -8,7 +8,6 @@ import SwiftUI
 
 struct LabelSelectSection: View {
     var option: SetAlarm
-    @State var label: String?
     @State private var name = ""
     var body: some View {
         ZStack {
@@ -16,6 +15,9 @@ struct LabelSelectSection: View {
                 Text("라벨").responsiveTextify(Style.textFontScale, .bold)
                 Spacer()
                 TextField("", text: $name)
+                    .onChange(of: name, perform: { newValue in
+                        option.label = newValue
+                    })
                     .placeholder(when: name.isEmpty) {
                         Text("선택안함").foregroundColor(.gray)
                             .multilineTextAlignment(.trailing)

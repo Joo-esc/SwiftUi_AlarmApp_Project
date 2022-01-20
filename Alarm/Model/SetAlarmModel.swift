@@ -9,8 +9,8 @@ import Foundation
 struct SetAlarmModel {
     // 임시 알람 데이터 리스트, 실제 환경에서는 LocalDB나 서버로부터 데이터를 받아와야됨
     var alarmList: [Alarm] = [
-        Alarm(id: 12, time: Calendar.current.date(byAdding: .hour, value: 5, to: Date())!, missionType: 0, level: 1, round: 4, selectedDays: Week().weekList, label: "운동", isActivate: true),
-        Alarm(id: 13, time: Calendar.current.date(byAdding: .hour, value: -5, to: Date())!, missionType: 0, level: 1, round: 3, selectedDays: Week().weekList, label: nil, isActivate: false),
+        Alarm(id: UUID(), time: Calendar.current.date(byAdding: .hour, value: 5, to: Date())!, missionType: 0, level: 1, round: 4, selectedDays: Week().weekList, label: "운동", isActivate: true),
+        Alarm(id: UUID(), time: Calendar.current.date(byAdding: .hour, value: -5, to: Date())!, missionType: 0, level: 1, round: 3, selectedDays: Week().weekList, label: nil, isActivate: false),
     ]
     
     // MARK: - 알림리스트에 새로운 알람을 추가하는 기능
@@ -23,7 +23,7 @@ struct SetAlarmModel {
     
     
     struct Alarm: Identifiable {
-        let id: Int
+        let id: UUID
         var time: Date = Calendar.current.date(byAdding: .minute, value: 1, to: Date())! // 알람 시간
         var missionType: Int? // 미션 종류
         var level: Int? // 게임 미션 난이도

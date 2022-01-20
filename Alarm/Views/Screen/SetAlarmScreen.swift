@@ -9,7 +9,7 @@ import SwiftUI
 struct SetAlarmScreen: View {
     @ObservedObject var option: SetAlarm
     @State private var isModalShow = false
-    
+    @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
@@ -19,9 +19,9 @@ struct SetAlarmScreen: View {
                     MissionSelectSection(option: option, selectedType: option.missionType
                     )
                     DaySelectSection(option: option, weekList: option.selectedDays, showModal: showModal)
-                    LabelSelectSection(option: option, label: option.label)
+                    LabelSelectSection(option: option)
                     Spacer()
-                    BottomDivStackButton(isDivided: true, leftTitle: "취소", leftAction: showModal, rightTitle: "저장", rightAction: option.saveAlarm)
+                    BottomDivStackButton(isDivided: true, leftTitle: "취소", leftAction: showModal, rightTitle: "저장", rightAction: saveAlarm)
                 }
                 .padding(.horizontal, Style.hPadding)
                 // MARK: - Modal Dialog 뷰
@@ -34,7 +34,10 @@ struct SetAlarmScreen: View {
     }
     
     func showModal() { isModalShow.toggle() }
-    
+    func saveAlarm() {
+        option.saveAlarm()
+        self.presentationMode.wrappedValue.dismiss()
+    }
     
     
     private struct Style {

@@ -26,13 +26,13 @@ class SetAlarm: ObservableObject {
     }
     
     
-    
     var alarmList: [Option] {
         model.alarmList
     }
     
     //MARK: - Intent
     func saveAlarm() {
-        model.saveAlarm(Option(id: 4, time: time, missionType: missionType, level: Int(level), round: Int(round), selectedDays: selectedDays, label: label, isActivate: true))
+        model.saveAlarm(Option(id: UUID(), time: time, missionType: missionType, level: Int(level), round: Int(round), selectedDays: selectedDays, label: label, isActivate: true))
+    
     }
 }
