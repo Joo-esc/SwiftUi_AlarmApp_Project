@@ -13,7 +13,9 @@ let tempMinuite = 35
 
 struct MainScreen: View {
     var week: Week
+    @ObservedObject var alarm = SetAlarm()
     var itemColumns: [GridItem] = Array(repeating: .init(.adaptive(minimum: 100)), count: 2)
+    @State private var birthDate = Date() // Test Variable
     var body: some View {
         NavigationView {
             GeometryReader { g in
@@ -26,9 +28,13 @@ struct MainScreen: View {
                                 .foregroundColor(Color.lightGrey)
                             Text("\(String(tempHour))시간 \(String(tempMinuite))분 남음")
                                 .responsiveTextify(26, .medium)
+                                .onTapGesture {
+                                    print(alarm.alarmList.count)
+                                }
                             LazyVGrid (columns: itemColumns, spacing: 20 ) {
-                                ForEach(tempArray, id: \.self) { item in
-                                    AlarmItemView(week: Week())
+                                ForEach(alarm.alarmList) { item in
+                                    AlarmItemView(option: item,
+                                                  week: Week(), alarmOnOff: item.isActivate)
                                 }
                                 .aspectRatio(154/162, contentMode: .fit)
                             }
@@ -36,13 +42,14 @@ struct MainScreen: View {
                         }
                         .padding(.horizontal, 20)
                     }
-                        FloatingActionButton()
-                            .position(x: g.size.width - 52, y: g.size.height - 60)
+                    FloatingActionButton(option: alarm)
+                        .position(x: g.size.width - 52, y: g.size.height - 60)
                 }
             }
             .hiddenNavBarStyle()
         }
     }
+    
 }
 
 
@@ -50,32 +57,29 @@ struct MainScreen: View {
 
 
 struct AlarmItemView: View {
+    var option: SetAlarm.Option
     var week: Week
-    @State private var alarmOnOff = false
+    @State var alarmOnOff: Bool
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: 20).foregroundColor(Color.lightDark)
         ZStack {
             shape
             VStack (alignment: .leading) {
-                Text("Work")
+                Text(option.label ?? "")
                     .responsiveTextify(14, .regular)
-                HStack (alignment: .firstTextBaseline){
-                    Text("8:30")
-                        .responsiveTextify(36, .medium)
-                    Text("AM")
-                        .responsiveTextify(18, .bold)
-                }
+                Text(option.time, style : .time)
+                    .responsiveTextify(26, .medium)
                 Spacer()
                 HStack {
-                    ForEach (week.weekList) {item in
+                    ForEach (option.selectedDays) {item in
                         Text(item.content)
-                            .responsiveTextify(12, .bold)
                             .weekItemModifier(isSelected: item.isSelected)
+                            .responsiveTextify(12, .bold)
                     }
                     
                 }
                 Toggle(isOn: $alarmOnOff) {
-                    Text("")
+                    EmptyView()
                 }
                 .toggleStyle(SwitchToggleStyle(tint: Color.brandColor))
             }

@@ -59,7 +59,7 @@ struct SetMemorizeGameScreen: View {
 // 문제 개수를 설정하는 뷰
 
 struct SelectGameNumberView: View {
-    @Binding var selectedRound: Int
+    @Binding var selectedRound: Double
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -118,7 +118,7 @@ struct BottomStackButton: View {
     let setOptions: () -> Void
     var body: some View {
         HStack {
-            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: option.level + 2.0, totalRound: option.round, countDonwTime: 60))  ){
+            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: option.level + 2.0, totalRound: Int(option.round), countDonwTime: 60))  ){
                 Text("미리보기").foregroundColor(.white)
             }
             Spacer()

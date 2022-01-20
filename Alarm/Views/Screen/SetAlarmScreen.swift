@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct SetAlarmScreen: View {
-    @ObservedObject var option = SetAlarm()
+    @ObservedObject var option: SetAlarm
     @State private var isModalShow = false
     
     var body: some View {
@@ -21,7 +21,7 @@ struct SetAlarmScreen: View {
                     DaySelectSection(option: option, weekList: option.selectedDays, showModal: showModal)
                     LabelSelectSection(option: option, label: option.label)
                     Spacer()
-                    BottomDivStackButton(isDivided: true, leftTitle: "취소", leftAction: showModal, rightTitle: "저장", rightAction: showModal)
+                    BottomDivStackButton(isDivided: true, leftTitle: "취소", leftAction: showModal, rightTitle: "저장", rightAction: option.saveAlarm)
                 }
                 .padding(.horizontal, Style.hPadding)
                 // MARK: - Modal Dialog 뷰
@@ -34,6 +34,8 @@ struct SetAlarmScreen: View {
     }
     
     func showModal() { isModalShow.toggle() }
+    
+    
     
     private struct Style {
         static let hPadding: CGFloat = 20

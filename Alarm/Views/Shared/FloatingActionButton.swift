@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct FloatingActionButton: View {
+    var option: SetAlarm
     var body: some View {
-        NavigationLink(destination: SetAlarmScreen()) {
+        NavigationLink(destination: SetAlarmScreen(option: option)) {
         ZStack {
             
             Circle()

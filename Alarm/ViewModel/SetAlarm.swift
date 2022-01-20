@@ -9,22 +9,30 @@ import SwiftUI
 
 
 class SetAlarm: ObservableObject {
-    typealias Option = SetAlarmModel.AlarmOption
-    @Published var model: SetAlarmModel = SetAlarmModel(id: 3)
+    typealias Option = SetAlarmModel.Alarm
+    @Published var model: SetAlarmModel = SetAlarmModel()
     @Published var time = Date()
     @Published var missionType: Int?
     @Published var level: Double = 0.0
-    @Published var round: Int = 3
+    @Published var round: Double = 3.0
     @Published var selectedDays = Week().weekList
     @Published var label: String?
+    
+    
     
     // 선택된 요일의 'isSelect' 프로퍼티를 toggle
     func chooseDay(_ day: Week.Day) {
         selectedDays[day.id].isSelected.toggle()
     }
     
-    var options: Option {
-        model.alarmOption
+    
+    
+    var alarmList: [Option] {
+        model.alarmList
     }
     
+    //MARK: - Intent
+    func saveAlarm() {
+        model.saveAlarm(Option(id: 4, time: time, missionType: missionType, level: Int(level), round: Int(round), selectedDays: selectedDays, label: label, isActivate: true))
+    }
 }

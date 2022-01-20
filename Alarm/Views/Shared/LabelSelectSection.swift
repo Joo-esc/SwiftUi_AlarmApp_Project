@@ -13,14 +13,14 @@ struct LabelSelectSection: View {
     var body: some View {
         ZStack {
             HStack {
-                Text("반복").responsiveTextify(Style.textFontScale, .bold)
+                Text("라벨").responsiveTextify(Style.textFontScale, .bold)
                 Spacer()
                 TextField("", text: $name)
                     .placeholder(when: name.isEmpty) {
-                        Text("Placeholder recreated").foregroundColor(.gray)
+                        Text("선택안함").foregroundColor(.gray)
                             .multilineTextAlignment(.trailing)
                     }
-                    .foregroundColor(.lightGrey)
+                    .foregroundColor(.brandColor)
                     .multilineTextAlignment(.trailing)
                     .responsiveTextify(Style.textFontScale, .regular)
             }
@@ -38,6 +38,8 @@ struct LabelSelectSection: View {
     }
 }
 
+
+// PlaceHolder 익스텐션, placeHolder을 스타일 모듈
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
