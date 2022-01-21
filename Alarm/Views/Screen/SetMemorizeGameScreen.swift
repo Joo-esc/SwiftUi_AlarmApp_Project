@@ -10,21 +10,21 @@ import SwiftUI
 struct SetMemorizeGameScreen: View {
     let selectedType: Int
     @State var option: SetAlarm
+    
+    
     @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     var body: some View {
             VStack (alignment: .leading){
                 Text("설정")
                     .responsiveTextify(Style.titleScale, .medium)
-                    .onTapGesture {
-                    }
                 Text("기억력 게임")
                     .foregroundColor(.darkGrey)
                     .responsiveTextify(Style.subTitleScale, .medium)
                     .padding(.bottom, Style.sectionPadding)
-                SelectDifficultyView(selectedLevel: option.level, option: option)
+                SelectDifficultyView(selectedLevel: option.alarm.level ?? 1.0, option: option)
                     .aspectRatio(Style.rangeBox1, contentMode: .fit)
                     .padding(.bottom, Style.sectionPadding)
-                SelectGameNumberView(selectedRound: $option.round)
+                SelectGameNumberView(selectedRound: Int(option.alarm.round ?? 4), option: option)
                     .aspectRatio(Style.rangeBox2, contentMode: .fit)
                 Spacer()
 
@@ -40,7 +40,7 @@ struct SetMemorizeGameScreen: View {
     
     // 변경된 State을 최정적으로 Store하는 로직, '완료 버튼 클릭 시' 
     func completeFunc() {
-        option.missionType = selectedType
+        option.alarm.missionType = selectedType
     }
     
     private struct Style {
@@ -59,7 +59,8 @@ struct SetMemorizeGameScreen: View {
 // 문제 개수를 설정하는 뷰
 
 struct SelectGameNumberView: View {
-    @Binding var selectedRound: Double
+    @State var selectedRound: Int
+    var option: SetAlarm
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -69,13 +70,16 @@ struct SelectGameNumberView: View {
                     .responsiveTextify(12, .medium)
             }
             VStack {
-                Picker(selection: $selectedRound, label: Text("Please choose a color")) {
+                Picker(selection: $selectedRound, label: Text("")) {
                     ForEach(0..<20) { index in
                         Text(String(index))
                             .foregroundColor(.white)
                     }
                 }
                 .pickerStyle(WheelPickerStyle())
+                .onChange(of: selectedRound, perform: { newValue in
+                    option.alarm.round = Double(newValue)
+                })
             }
             .roundRectify(8, .leading)
         }
@@ -100,11 +104,10 @@ struct SelectDifficultyView: View {
                     .foregroundColor(.darkGrey)
                     .responsiveTextify(12, .medium)
                 Slider(value: $selectedLevel, in: 0...4, step: 1) { _ in
-                    option.level = selectedLevel
+                    option.alarm.level = selectedLevel
                 }
                 .tint(.brandColor)
                 .padding(.horizontal, 20)
-                
                 RangeSideIndicator()
             }
             .roundRectify(8, .center)
@@ -118,7 +121,7 @@ struct BottomStackButton: View {
     let setOptions: () -> Void
     var body: some View {
         HStack {
-            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: option.level + 2.0, totalRound: Int(option.round), countDonwTime: 60))  ){
+            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: option.alarm.level ?? 1 , totalRound: Int(option.alarm.round ?? 3), countDonwTime: 60))  ){
                 Text("미리보기").foregroundColor(.white)
             }
             Spacer()

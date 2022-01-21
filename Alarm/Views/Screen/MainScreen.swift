@@ -15,7 +15,8 @@ struct MainScreen: View {
     var week: Week
     @ObservedObject var alarm = SetAlarm()
     var itemColumns: [GridItem] = Array(repeating: .init(.adaptive(minimum: 100)), count: 2)
-    @State private var birthDate = Date() // Test Variable
+    @State private var goToNewView: Bool = false
+    @State private var selectedItem: SetAlarm.Option = SetAlarm().alarm
     var body: some View {
         NavigationView {
             GeometryReader { g in
@@ -29,12 +30,23 @@ struct MainScreen: View {
                             Text("\(String(tempHour))시간 \(String(tempMinuite))분 남음")
                                 .responsiveTextify(26, .medium)
                                 .onTapGesture {
-                                    print(alarm.alarmList.count)
+                                    print(alarm.alarmList[2].level ?? "defaul")
+                                
                                 }
                             LazyVGrid (columns: itemColumns, spacing: 20 ) {
                                 ForEach(alarm.alarmList) { item in
                                     AlarmItemView(option: item,
                                                   week: Week(), alarmOnOff: item.isActivate)
+                                        .onTapGesture {
+                                            selectedItem = item
+                                            alarm.passData(item)
+                                            self.goToNewView.toggle()
+                                        }
+                                        .background(
+                                            // 개별 알람 수정&설정 페이지로 이동하는 라우트 동작
+                                            NavigationLink(destination: SetAlarmScreen(option: alarm), isActive: self.$goToNewView) { EmptyView() }.hidden()
+                                        )
+
                                 }
                                 .aspectRatio(154/162, contentMode: .fit)
                             }
@@ -49,7 +61,6 @@ struct MainScreen: View {
             .hiddenNavBarStyle()
         }
     }
-    
 }
 
 

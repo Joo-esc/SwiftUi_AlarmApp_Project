@@ -36,6 +36,9 @@ struct MemorizeGameScreen: View {
                             timeRemaining: game.countDonwTime,
                             passedCountValue: game.countDonwTime
                         )
+                            .onTapGesture {
+                                print(game.length)
+                            }
                         BottomDivStackButton(isDivided: false, leftTitle: nil, leftAction: goBack, rightTitle: "완료", rightAction: goBack)
                         Spacer()
                     }

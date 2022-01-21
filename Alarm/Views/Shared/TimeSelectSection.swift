@@ -8,6 +8,7 @@ import SwiftUI
 
 struct TimeSelectSection: View {
     @Binding var startDate:Date
+
     
     var body: some View {
         VStack (alignment: .center) {
@@ -27,6 +28,8 @@ struct TimeSelectSection: View {
                 .labelsHidden()
                 .colorInvert().colorMultiply(.white)
                 .padding(.horizontal, 6)
+            
+           
             Spacer()
         }
         .roundRectify(Style.containerRadius, .leading)

@@ -15,13 +15,14 @@ struct SetAlarmScreen: View {
             ZStack(alignment: .bottom) {
                 Color.darkBackground.ignoresSafeArea()
                 VStack {
-                    TimeSelectSection(startDate: $option.time)
-                    MissionSelectSection(option: option, selectedType: option.missionType
+                    TimeSelectSection(startDate:
+                                        $option.alarm.time)
+                    MissionSelectSection(option: option, selectedType: option.alarm.missionType
                     )
-                    DaySelectSection(option: option, weekList: option.selectedDays, showModal: showModal)
+                    DaySelectSection(option: option, weekList: option.alarm.selectedDays, showModal: showModal)
                     LabelSelectSection(option: option)
                     Spacer()
-                    BottomDivStackButton(isDivided: true, leftTitle: "취소", leftAction: showModal, rightTitle: "저장", rightAction: saveAlarm)
+                    BottomDivStackButton(isDivided: true, leftTitle: "취소", leftAction: quitSetting, rightTitle: "저장", rightAction: saveAlarm)
                 }
                 .padding(.horizontal, Style.hPadding)
                 // MARK: - Modal Dialog 뷰
@@ -29,13 +30,29 @@ struct SetAlarmScreen: View {
                     DaySelectModal(showModal: $isModalShow, option: option, screenHeight: g.size.height * Style.heightScale)
                 }
             }
+            
             .hiddenNavBarStyle()
         }
     }
     
     func showModal() { isModalShow.toggle() }
+    
+    func quitSetting() {
+        option.resetAlarmData()
+        self.presentationMode.wrappedValue.dismiss()
+    }
     func saveAlarm() {
-        option.saveAlarm()
+        // 조건: 새로운 알람을 저장 할 때
+        if option.alarm.id == nil {
+            option.alarm.id = UUID()
+            option.saveAlarm()
+        }
+        // 조건: 기존 알람을 수정 할 때
+        else {
+//            option.saveAlarm()
+            option.editAlarm(option.alarm)
+        }
+
         self.presentationMode.wrappedValue.dismiss()
     }
     

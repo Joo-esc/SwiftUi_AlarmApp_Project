@@ -50,7 +50,7 @@ struct DaySelectModal: View {
                     
                 }
                 // 요일 리스트 뷰
-                ForEach (option.selectedDays) {item in
+                ForEach (option.alarm.selectedDays) {item in
                     HStack {
                         Text(item.content)
                             .foregroundColor(.black)

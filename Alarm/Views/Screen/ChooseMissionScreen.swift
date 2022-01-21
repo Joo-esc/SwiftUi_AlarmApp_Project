@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChooseMissionScreen: View {
     private(set) var mission: Mission
-    @ObservedObject var option: SetAlarm
+    var option: SetAlarm
     @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     var itemColumns: [GridItem] = Array(repeating: .init(.adaptive(minimum: 100)), count: 2)
     var body: some View {
@@ -23,7 +23,7 @@ struct ChooseMissionScreen: View {
                             ForEach(mission.missions, id:\.self) { item in
                                 NavigationLink (destination: SetMissionDetailScreen( option: option, id: item.id).hiddenNavBarStyle
                                 ){
-                                    MissionItemView(mission: item, selectedType: option.missionType)
+                                    MissionItemView(mission: item, selectedType: option.alarm.missionType)
                                 }
                             }
                             .aspectRatio(ScreenStyle.itemGridRation, contentMode: .fit)
@@ -39,7 +39,7 @@ struct ChooseMissionScreen: View {
     
     
     func cancel() {
-        option.missionType = nil
+        option.alarm.missionType = nil
         goBack()
     }
     

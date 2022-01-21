@@ -54,7 +54,7 @@ struct MemorizeModel<CardContent> where CardContent: Equatable{
     init(cardLength: Double, createCardContent: (Int) -> CardContent) {
         cards = []
         // 초기화된 'cardLenght' 값에 따라 카드 쌍의 개수가 결정됨.
-        for index in 0 ..< Int(cardLength) {
+        for index in 0 ..< Int(cardLength) + 2 { // 설정된 난이도에 따라 2의 배수로 카드의 개수가 정해짐
             let content = createCardContent(index)
             cards.append(Card(content: content, id: index * 2))
             cards.append(Card(content: content, id: index * 2 + 1))

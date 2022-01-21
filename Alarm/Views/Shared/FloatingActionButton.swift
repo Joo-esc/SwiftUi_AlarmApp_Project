@@ -12,7 +12,6 @@ struct FloatingActionButton: View {
     var body: some View {
         NavigationLink(destination: SetAlarmScreen(option: option)) {
         ZStack {
-            
             Circle()
             Image(systemName: "plus.circle.fill")
                 .resizable()

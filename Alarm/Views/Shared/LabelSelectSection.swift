@@ -8,17 +8,17 @@ import SwiftUI
 
 struct LabelSelectSection: View {
     var option: SetAlarm
-    @State private var name = ""
+    @State private var formText = ""
     var body: some View {
         ZStack {
             HStack {
                 Text("라벨").responsiveTextify(Style.textFontScale, .bold)
                 Spacer()
-                TextField("", text: $name)
-                    .onChange(of: name, perform: { newValue in
-                        option.label = newValue
+                TextField("", text: $formText)
+                    .onChange(of: formText, perform: { newValue in
+                        option.alarm.label = newValue
                     })
-                    .placeholder(when: name.isEmpty) {
+                    .placeholder(when: formText.isEmpty) {
                         Text("선택안함").foregroundColor(.gray)
                             .multilineTextAlignment(.trailing)
                     }
@@ -30,6 +30,9 @@ struct LabelSelectSection: View {
         .padding(.horizontal, Style.hPadding)
         .roundRectify(Style.containerRadius, .leading)
         .aspectRatio(Style.containerRatio, contentMode: .fit)
+        .onAppear {
+            formText = option.alarm.label ?? "" // 라벨값을 받아올 때 textField에 보이는 String 데이터
+        }
     }
     
     private struct Style {
