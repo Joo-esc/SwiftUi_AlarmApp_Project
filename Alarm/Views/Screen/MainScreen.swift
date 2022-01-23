@@ -30,9 +30,7 @@ struct MainScreen: View {
                             Text("\(String(tempHour))시간 \(String(tempMinuite))분 남음")
                                 .responsiveTextify(26, .medium)
                                 .onTapGesture {
-                                    print(alarm.alarmList[2].level ?? "defaul")
-                                
-                                }
+                                    print(alarm.alarmList[2].level ?? "defaul") }
                             LazyVGrid (columns: itemColumns, spacing: 20 ) {
                                 ForEach(alarm.alarmList) { item in
                                     AlarmItemView(option: item,
@@ -46,7 +44,6 @@ struct MainScreen: View {
                                             // 개별 알람 수정&설정 페이지로 이동하는 라우트 동작
                                             NavigationLink(destination: SetAlarmScreen(option: alarm), isActive: self.$goToNewView) { EmptyView() }.hidden()
                                         )
-
                                 }
                                 .aspectRatio(154/162, contentMode: .fit)
                             }
@@ -82,7 +79,7 @@ struct AlarmItemView: View {
                     .responsiveTextify(26, .medium)
                 Spacer()
                 HStack {
-                    ForEach (option.selectedDays) {item in
+                    ForEach (option.selectedDays) { item in
                         Text(item.content)
                             .weekItemModifier(isSelected: item.isSelected)
                             .responsiveTextify(12, .bold)

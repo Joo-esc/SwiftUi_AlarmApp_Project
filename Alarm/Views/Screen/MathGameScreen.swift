@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MathGameScreen: View {
     var body: some View {
-        Text("Math Game Screen").responsiveTextify(14, .bold)
+        VStack {
+           
+        }
+
     }
 }

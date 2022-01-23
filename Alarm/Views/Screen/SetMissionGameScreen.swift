@@ -1,34 +1,36 @@
 //
-//  MemorizeGameView.swift
-//  Alarm
-//
+// '기억력 게임' & '수학 게임'의 미션의 옵션을 값을 설정하는 스크린
 //  Created by 이해주 on 2022/01/08.
 //
 
 import SwiftUI
 
-struct SetMemorizeGameScreen: View {
+struct SetMissionGameScreen: View {
+    let gameName: String
     let selectedType: Int
     @State var option: SetAlarm
-    
     
     @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     var body: some View {
             VStack (alignment: .leading){
                 Text("설정")
                     .responsiveTextify(Style.titleScale, .medium)
-                Text("기억력 게임")
+                Text(gameName)
                     .foregroundColor(.darkGrey)
                     .responsiveTextify(Style.subTitleScale, .medium)
                     .padding(.bottom, Style.sectionPadding)
-                SelectDifficultyView(selectedLevel: option.alarm.level ?? 1.0, option: option)
+                SelectDifficultyView(
+                    selectedType: selectedType,
+                    selectedLevel: option.alarm.level ?? 1.0, option: option)
                     .aspectRatio(Style.rangeBox1, contentMode: .fit)
                     .padding(.bottom, Style.sectionPadding)
                 SelectGameNumberView(selectedRound: Int(option.alarm.round ?? 4), option: option)
                     .aspectRatio(Style.rangeBox2, contentMode: .fit)
                 Spacer()
 
-                BottomStackButton(goBack: goBack, option: option, setOptions: completeFunc)
+                BottomStackButton(
+                    selectedType: selectedType,
+                    goBack: goBack, option: option, setOptions: completeFunc)
             }
             .padding(.horizontal,Style.bottomPadding)
     }
@@ -57,7 +59,6 @@ struct SetMemorizeGameScreen: View {
 
 
 // 문제 개수를 설정하는 뷰
-
 struct SelectGameNumberView: View {
     @State var selectedRound: Int
     var option: SetAlarm
@@ -87,43 +88,25 @@ struct SelectGameNumberView: View {
 }
 
 
-// 문제 난이도를 설정하는 뷰
-
-struct SelectDifficultyView: View {
-    @State var selectedLevel: Double
-    @State var option: SetAlarm
-   
-    @State private var isEditing = false
-    var body: some View {
-        VStack(alignment: .leading){
-            Text("난이도")
-                .responsiveTextify(14, .bold)
-            VStack {
-                DifficultyRangeIndicator(selectedLevel: selectedLevel)
-                MemorizeRangeIndicator(selectedLevel: selectedLevel)
-                    .foregroundColor(.darkGrey)
-                    .responsiveTextify(12, .medium)
-                Slider(value: $selectedLevel, in: 0...4, step: 1) { _ in
-                    option.alarm.level = selectedLevel
-                }
-                .tint(.brandColor)
-                .padding(.horizontal, 20)
-                RangeSideIndicator()
-            }
-            .roundRectify(8, .center)
-        }
-    }
-}
-
+// 하단 고정 버튼
 struct BottomStackButton: View {
+    let selectedType: Int
     var goBack: () -> Void
     @State var option: SetAlarm
     let setOptions: () -> Void
     var body: some View {
         HStack {
-            NavigationLink (destination: MemorizeGameScreen(game: Memorize(length: option.alarm.level ?? 1 , totalRound: Int(option.alarm.round ?? 3), countDonwTime: 60))  ){
-                Text("미리보기").foregroundColor(.white)
+            // 게임 미션 종류에 따라 라우트되는 스크린이 다름.
+            if selectedType == 0 {
+                NavigationLink (destination:  MemorizeGameScreen(game: Memorize(length: option.alarm.level ?? 1 , totalRound: Int(option.alarm.round ?? 3), countDonwTime: 60))) {
+                    Text("미리보기").foregroundColor(.white)
+                }
+            } else {
+                NavigationLink (destination: MathGameScreen()) {
+                    Text("미리보기").foregroundColor(.white)
+                }
             }
+
             Spacer()
             Button(action: {
                 setOptions()
