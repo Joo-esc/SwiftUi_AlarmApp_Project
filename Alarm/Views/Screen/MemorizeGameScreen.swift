@@ -12,7 +12,7 @@ struct MemorizeGameScreen: View {
     
     var body: some View {
         NavigationView {
-            ZStack() {
+            ZStack {
                 Color.darkBackground.ignoresSafeArea()
                 GeometryReader { g in
                     VStack(alignment: .leading) {

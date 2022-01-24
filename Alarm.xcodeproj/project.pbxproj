@@ -40,6 +40,8 @@
 		6FA3827A2786EE0500F1948B /* WeekModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA382792786EE0500F1948B /* WeekModel.swift */; };
 		6FA3827D2786EE1A00F1948B /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA3827C2786EE1A00F1948B /* Week.swift */; };
 		6FA3827F278705ED00F1948B /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA3827E278705ED00F1948B /* FloatingActionButton.swift */; };
+		6FBEE2C9279DE88800C40324 /* MathModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBEE2C8279DE88800C40324 /* MathModel.swift */; };
+		6FBEE2CB279DE89100C40324 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBEE2CA279DE89100C40324 /* Math.swift */; };
 		6FC797EF279AB16A00377FB3 /* SelectDifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC797EE279AB16A00377FB3 /* SelectDifficultyView.swift */; };
 		6FC8DE8827874038002344E4 /* SetAlarmScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8DE8727874038002344E4 /* SetAlarmScreen.swift */; };
 		6FF5AA7727942EF50078EA1B /* SetAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5AA7627942EF50078EA1B /* SetAlarm.swift */; };
@@ -82,6 +84,8 @@
 		6FA382792786EE0500F1948B /* WeekModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekModel.swift; sourceTree = "<group>"; };
 		6FA3827C2786EE1A00F1948B /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		6FA3827E278705ED00F1948B /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
+		6FBEE2C8279DE88800C40324 /* MathModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathModel.swift; sourceTree = "<group>"; };
+		6FBEE2CA279DE89100C40324 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		6FC797EE279AB16A00377FB3 /* SelectDifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyView.swift; sourceTree = "<group>"; };
 		6FC8DE8727874038002344E4 /* SetAlarmScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmScreen.swift; sourceTree = "<group>"; };
 		6FF5AA7627942EF50078EA1B /* SetAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarm.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				6F5240BB2788B71B001C76D5 /* MissionModel.swift */,
 				6F9234D0278ADD0A00AA6636 /* MemorizeModel.swift */,
 				6FF5AA7827942F010078EA1B /* SetAlarmModel.swift */,
+				6FBEE2C8279DE88800C40324 /* MathModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				6F5240BD2788B7DB001C76D5 /* Mission.swift */,
 				6F9234D2278ADFEE00AA6636 /* Memorize.swift */,
 				6FF5AA7627942EF50078EA1B /* SetAlarm.swift */,
+				6FBEE2CA279DE89100C40324 /* Math.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -320,6 +326,8 @@
 				6F6F7E642796E36600E4D505 /* DaySelectModal.swift in Sources */,
 				6FC8DE8827874038002344E4 /* SetAlarmScreen.swift in Sources */,
 				6FF5AA7927942F010078EA1B /* SetAlarmModel.swift in Sources */,
+				6FBEE2CB279DE89100C40324 /* Math.swift in Sources */,
+				6FBEE2C9279DE88800C40324 /* MathModel.swift in Sources */,
 				6F735C2B27860CF200846817 /* AlarmApp.swift in Sources */,
 				6F9234D1278ADD0A00AA6636 /* MemorizeModel.swift in Sources */,
 				6F9234CC278A891A00AA6636 /* MemorizeGameScreen.swift in Sources */,
