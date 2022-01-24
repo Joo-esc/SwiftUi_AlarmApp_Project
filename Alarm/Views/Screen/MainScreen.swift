@@ -33,7 +33,9 @@ struct MainScreen: View {
                                     print(alarm.alarmList[2].level ?? "defaul") }
                             LazyVGrid (columns: itemColumns, spacing: 20 ) {
                                 ForEach(alarm.alarmList) { item in
-                                    AlarmItemView(option: item,
+                                    AlarmItemView(
+                                        goToNewView: $goToNewView,
+                                        option: item,
                                                   week: Week(), alarmOnOff: item.isActivate)
                                         .onTapGesture {
                                             selectedItem = item
@@ -65,37 +67,52 @@ struct MainScreen: View {
 
 
 struct AlarmItemView: View {
+    @Binding var goToNewView: Bool
     var option: SetAlarm.Option
     var week: Week
     @State var alarmOnOff: Bool
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: 20).foregroundColor(Color.lightDark)
+        let shape = RoundedRectangle(cornerRadius: Style.recCornerSize).foregroundColor(Color.lightDark)
         ZStack {
             shape
             VStack (alignment: .leading) {
                 Text(option.label ?? "")
-                    .responsiveTextify(14, .regular)
+                    .responsiveTextify(Style.labelTSize, .regular)
                 Text(option.time, style : .time)
-                    .responsiveTextify(26, .medium)
+                    .responsiveTextify(Style.timeTSize, .medium)
                 Spacer()
                 HStack {
                     ForEach (option.selectedDays) { item in
                         Text(item.content)
                             .weekItemModifier(isSelected: item.isSelected)
-                            .responsiveTextify(12, .bold)
+                            .responsiveTextify(Style.weekTSize, .bold)
                     }
                     
                 }
                 Toggle(isOn: $alarmOnOff) {
                     EmptyView()
                 }
+                .onTapGesture {
+                    // Just to Prevent Duplicate Touch Issue
+                }
+                
                 .toggleStyle(SwitchToggleStyle(tint: Color.brandColor))
             }
         }
-        .padding(.horizontal, 22.0)
-        .padding(.vertical, 16.0)
+        .padding(.horizontal, Style.hPadding)
+        .padding(.vertical, Style.vPadding)
         .background(Color.lightDark)
-        .cornerRadius(20)
+        .cornerRadius(Style.recCornerSize)
+      
+    }
+    
+    private struct Style {
+        static let recCornerSize: CGFloat = 20
+        static let labelTSize: CGFloat = 14
+        static let timeTSize: CGFloat = 26
+        static let weekTSize: CGFloat = 12
+        static let hPadding: CGFloat = 22
+        static let vPadding: CGFloat = 16
         
     }
 }

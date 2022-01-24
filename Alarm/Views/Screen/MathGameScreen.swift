@@ -8,27 +8,36 @@
 import SwiftUI
 
 struct MathGameScreen: View {
-    @ObservedObject var game = Math(totalRound: 4, level: 0)
+    @ObservedObject var game: Math // VM
+    @Environment(\.presentationMode) var presentationMode // goBack() 로직을 실행하기 위한 설정
     var body: some View {
-        ZStack {
-            Color.darkBackground.ignoresSafeArea()
-            VStack {
-                GameNumIndicator(currentRound: game.currentRound, totalRound: game.totalRound)
-                ProblemIndicator(game: $game.model.mathGame, level: game.level)
-                AnswerTextField()
-                Text("AIM").responsiveTextify(20, .bold)
-                    .onTapGesture {
-                        game.generateExpression()
-                        print(game.math.firstN)
-                    }
-                    
-                Text(String(game.math.firstN)).responsiveTextify(14, .bold)
-                Text(String(game.math.secondN)).responsiveTextify(14, .bold)
-                Spacer()
+        NavigationView {
+            ZStack {
+                Color.darkBackground.ignoresSafeArea()
+                VStack {
+                    GameNumIndicator(currentRound: game.currentRound, totalRound: game.totalRound)
+                    ProblemIndicator(game: $game.model.mathGame, level: game.level)
+                    AnswerTextField(game: game)
+                    Spacer()
+                    BottomDivStackButton(isDivided: false, leftTitle: nil, leftAction: goBack, rightTitle: "완료", rightAction: goBack)
+                }
+                .padding(.horizontal, 20)
+            }.alert("기상 미션에 성공하셨습니다", isPresented: $game.isFinished) {
+                // 모든 라운드를 성공적으로 진행하였을 때 보여지는 팝업 알림창
+                Button("확인") {
+                    goBack()
+                }
             }
-        }
-
+            .hiddenNavBarStyle()
+         
+        }.hiddenNavBarStyle()
     }
+    
+    
+    // 이전 스크린으로 돌아가는 Navigation 로직
+    func goBack(){
+          self.presentationMode.wrappedValue.dismiss()
+      }
 }
 
 // 수학 문제를 보여주는 뷰
@@ -54,6 +63,7 @@ struct ProblemIndicator: View {
 
 // 수학 문제 답을 입력하는 뷰
 struct AnswerTextField: View {
+    var game: Math
     @State private var textInput = ""
     var body: some View {
         ZStack {
@@ -72,8 +82,14 @@ struct AnswerTextField: View {
                             .foregroundColor(.gray)
                     }
                     .onSubmit {
-                        print("submit")
-                        print(textInput)
+                        if game.math.answer == Int(textInput)  { // 입력된 값이 정답일 때
+                            textInput = "" // TextField 값 초기화
+                            game.generateExpression()
+                            game.increaseRound()
+                        } else {
+                            print("정답이 아닙닌다 ㅠㅠㅠ")
+                        }
+                        
                     }
                 Spacer()
             }

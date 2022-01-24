@@ -44,9 +44,6 @@ struct MemorizeGameScreen: View {
                     }
                 }.padding()
             }
-            .onAppear(perform: {
-                print(game.length)
-            })
             .alert("기상 미션에 성공하셨습니다", isPresented: $game.isFinished) {
                 Button("확인") {
                     goBack()

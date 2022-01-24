@@ -10,6 +10,7 @@ import SwiftUI
 class Math: ObservableObject {
     typealias Math = MathModel.MathGame
     
+    @Published var isFinished = false // 게임 종료 여부
     @Published private(set) var currentRound: Int = 1
     @Published private(set) var totalRound:Int
     let level: Int
@@ -25,6 +26,19 @@ class Math: ObservableObject {
         self.model = MathModel(level: level)
     }
     
+    //MARK: - Intent
+    
+
+    // 현재 라운드 수 증가
+    func increaseRound() {
+        if currentRound < totalRound {
+            currentRound += 1
+        } else {
+            isFinished = true
+        }
+    }
+    
+    // 새로운 수식을 generate
     func generateExpression() {
         model.generateExpression(level: level)
     }

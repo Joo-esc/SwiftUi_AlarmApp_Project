@@ -102,7 +102,7 @@ struct BottomStackButton: View {
                     Text("미리보기").foregroundColor(.white)
                 }
             } else {
-                NavigationLink (destination: MathGameScreen()) {
+                NavigationLink (destination: MathGameScreen(game: Math(totalRound: Int(option.alarm.round ?? 3), level: Int(option.alarm.level ?? 1)))) {
                     Text("미리보기").foregroundColor(.white)
                 }
             }

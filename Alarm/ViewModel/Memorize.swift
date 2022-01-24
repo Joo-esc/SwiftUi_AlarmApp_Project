@@ -8,7 +8,7 @@ import SwiftUI
 class Memorize: ObservableObject {
     static let emojiList = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🫐", "🍑", "🥭", "🍍"]
     
-    @Published var isFinished = false 
+    @Published var isFinished = false // 게임 종료 여부
     @Published private(set) var length: Double
     @Published private(set) var currentRound: Int = 1
     @Published private(set) var totalRound:Int

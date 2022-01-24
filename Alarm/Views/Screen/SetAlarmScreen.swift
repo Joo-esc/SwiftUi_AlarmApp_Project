@@ -30,9 +30,9 @@ struct SetAlarmScreen: View {
                     DaySelectModal(showModal: $isModalShow, option: option, screenHeight: g.size.height * Style.heightScale)
                 }
             }
-            
             .hiddenNavBarStyle()
         }
+        .hiddenNavBarStyle()
     }
     
     func showModal() { isModalShow.toggle() }
