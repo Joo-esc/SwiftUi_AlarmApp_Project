@@ -46,10 +46,6 @@ class Memorize: ObservableObject {
         model.shuffle()
     }
     
-    func printAim() {
-        print("DUMMU TIME")
-    }
-    
     // 게임 초기화
     func resetGame() {
         model.reset()
