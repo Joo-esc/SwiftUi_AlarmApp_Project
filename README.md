@@ -3,8 +3,7 @@
 ## 목차
 - [개발 동기](#개발-동기)
 - [요약](#요약)
-- [트러블 슈팅](#트러블-슈팅)
-- [학습한 내용](#학습한-내용)
+
 
 ## 개발 동기
 - <a href="https://cs193p.sites.stanford.edu/?gclid=Cj0KCQiA9OiPBhCOARIsAI0y71AAz_kpQcilmi8FF8nX9eQG4YadS2FCacNxbzbtKSsUkr9ZQzcf1QQaAnHUEALw_wcB">Stanford CS193p for IOS </a> 강의를 듣고 학습 내용을 기반으로 프로젝트를 구현, Swift UI에 이해도 증진
@@ -25,7 +24,3 @@
 | 아쉬운점 <br>& 느낀점 | 1. 한 화면에서 여러 옵션들을 설정&저장하는 과정에서 각각의 값들을 ``ViewModel``에서 관리하고 최종적으로 ``ViewModel``에서 저장된 옵션 값들을 ``Model``저장하는 방식을 채택함. 결국 일부 비즈니스 로직을 ``View Model``에서 ``View Controller``역할을 통해 수행하게 된다고 볼 수 있는데, 이때 이런 구조가 바림직한지 판단하기 힘들었음. 기능이나 메모리 관리에는 문제가 없었기 때문에 구조를 변경하지는 않았지만 더 많은 코드를 보는 노력이 필요할듯.  <br> <br/>2. Swift의 기본 문법이나 각종 메소드 및 키워드에 대한 개념이 부족한 상태에서 코드를 작성한 느낌이 강함. 체계적인 학습 이후에 토이 프로젝트를 진행해야겠다는 결론을 냄. <br> <br> 3. Swift UI의 선언형 UI 패더다임에 큰 매력을 느낌. Flutter와 UI을 그리는 부분에서 비슷한 부분이 많음.                                                                                                                                                                                     |
 
 
-## 트러블 슈팅
-
-
-## 학습한 내용
